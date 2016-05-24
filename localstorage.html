@@ -1,0 +1,53 @@
+<html>
+    <head>
+		<title>Wiseguy</title> 
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<link rel="apple-touch-icon" href="img/icon.png"/>
+		
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="stylesheet" type="text/css" href="carbon.css"/>
+		
+		<script language="JavaScript" type="text/javascript" src="javascript/moment.min.js"></script>
+		<script language="JavaScript" type="text/javascript" src="javascript/mustache.js"></script>	
+		<script language="JavaScript" type="text/javascript" src="javascript/carbon.js"></script>
+		<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.3.min.js"></script> 
+		<script language="JavaScript" type="text/javascript" src="javascript/jquery.detect_swipe.js"></script> 
+		<!--script language="JavaScript" type="text/javascript" src="javascript/tinysort.js"></script-->
+		
+	</head>
+	
+	<body>
+    <input id="newkey" placeholder="New key"/>
+    <input id="newdata" placeholder="Data"/></textarea>
+    <button onclick="window.localStorage.setItem($('#newkey').val(), $('#newdata').val());">Go</button>
+    <br/><br/><br/>
+    </body>
+
+<script>
+/*for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+  console.log( localStorage.getItem( localStorage.key( i ) ) );
+}*/
+
+/*for (var key in localStorage){
+   
+   $("body").append(key+"<br/><button onclick=\"key='"+key+"'; localStorage.removeItem(key);\">Delete</button><br/><br/>");
+
+}*/
+
+console.log("local storage");
+for (i = 0; i < localStorage.length; i++)   {
+    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+}
+
+
+$(document).on('click', "button", function() {
+    console.log($(this).prev().val());
+    window.localStorage.setItem($('#newdata').val(), $(this).prev().val());
+});
+
+</script>

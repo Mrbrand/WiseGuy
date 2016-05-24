@@ -1,0 +1,156 @@
+body {margin:0;  font-family:Verdana,Tahoma;background:#535069;}
+.page {width:100%;    top:0px;   display:none;}
+
+#new{min-height:1000px;}
+#edit{min-height:1000px;}
+#tree{min-height:600px;}
+#search{min-height:600px;}
+
+/****************************************************************************/
+/****** HEADER **************************************************************/
+/****************************************************************************/
+
+
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+    border: 2px solid #B0DC59;
+    border-radius: 5px;
+}
+
+/*.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  /*border: 1px solid #444;
+  box-shadow: 0 0 3px 3px #090;
+}*/
+
+
+    .header{
+      padding:5px;
+      background:#345;
+      margin:0;
+      height:45px;
+      font-size: 12pt;
+      color: #FFF;
+      display: block;
+    }
+    
+    .menu-title {margin-left:5px; width:220px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden; font-size: 20px; text-shadow:1px 1px 1px #123;}
+    .new-button {float:right;}
+    .home-button {float:left;margin-right:3px;}
+    .back-button {float:left;}
+	.cancel-button {float:left;}
+	.add-button{float:right;}
+	 
+    .controls{background:#345;padding:5px; height:36px;}
+    .controls-extra{background:#345; padding:5px; overflow-x:hidden; min-width:100%-10px;;}
+    .show-control{display: inline-block;}
+    .submenu{background:#345;padding:5px; height:36px;}
+    .search{border-radius:3px;width:150px;}
+    .type-filter {border-radius:3px;width:45%;}
+    .status-filter {border-radius:3px;width:45%;}
+    .path-filter {border-radius:3px;width:45%;}
+    
+  /*  .search_input {background: url(img/search-input.png) no-repeat scroll 0px 0px; padding-left:30px; }*/
+	 
+.awesomplete{display:block;}
+
+button{
+	-moz-box-shadow:inset 0px 1px 0px 0px #e3e3e3;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #e3e3e3;
+	box-shadow:inset 0px 1px 0px 0px #e3e3e3;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e0e0e0), color-stop(1, #b5b3b5));
+	background:-moz-linear-gradient(top, #e0e0e0 5%, #b5b3b5 100%);
+	background:-webkit-linear-gradient(top, #e0e0e0 5%, #b5b3b5 100%);
+	background-color:#e0e0e0;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#525252;
+	font-family:Trebuchet MS;
+	font-size:15px;
+	font-weight:bold;
+	padding: 6px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #dbdbdb;
+}
+button:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #b5b3b5), color-stop(1, #e0e0e0));
+	background:-moz-linear-gradient(top, #b5b3b5 5%, #e0e0e0 100%);
+	background:-webkit-linear-gradient(top, #b5b3b5 5%, #e0e0e0 100%);
+	background:-o-linear-gradient(top, #b5b3b5 5%, #e0e0e0 100%);
+	background:-ms-linear-gradient(top, #b5b3b5 5%, #e0e0e0 100%);
+	background:linear-gradient(to bottom, #b5b3b5 5%, #e0e0e0 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b5b3b5', endColorstr='#e0e0e0',GradientType=0);
+	background-color:#b5b3b5;
+}
+button:active {
+	position:relative;
+	top:1px;
+    background-color:#F00;
+}
+
+
+
+/****************************************************************************/
+/****** ITEMS IN LIST **********************************************************/
+/****************************************************************************/
+.empty{margin-top:100px;color:#666; text-align: center;}
+
+.subitem{
+  font-size: 10pt;
+  padding-bottom: 3px;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.project{ 
+   /* background:url('img/project-bg.png') center repeat-x;*/
+    background-size: auto 100%;
+    min-height:70px;
+    color: white;
+}
+
+.subitem-center{    width:auto;    padding-top:3px;     padding-left:3px;     overflow:hidden;    cursor:pointer;   min-height:60px; color:#555;}
+.subitem-left{ height:100%;   width:45px;    float:left;    cursor:pointer;}
+
+.title{overflow: hidden;    font-weight:bold;     float:left;    display: block;    width:100%;}
+.notes {font: italic 10px Arial;    color: #999;     margin-right:5px;   white-space: pre-line; }
+.postpone {font: italic 10px Arial;    color: CadetBlue;    margin-right:5px;   background:#345; padding:2px;}
+.subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
+.subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
+/*.notes {display: block; font: italic 10px Arial; color: #999; height: 12px; overflow: hidden; width:300px; text-overflow:ellipsis; white-space:nowrap;}*/
+ .path{font-size:9px;color:#AA6;}
+ 
+.next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
+.task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
+.finish_date{ font-size:10px;  color: #974;  height: 12px; overflow: hidden;font-weight:bold;}  
+	 
+.subitem .category {font-size:7px; display:block;margin-left: 3px;}
+.subitem .status {font-size:8px; display:block;margin-left: 5px;}
+.subitem .prio {font-size:8px; display:block;}
+
+.field-description{font-size:10px; display:block;color:white;margin-left:5px;}
+
+
+/****** FORM FIELDS *******/
+textarea {width:100%;  border:0; padding:5px; margin:0; font-size:12pt; color:#555; margin-bottom:2px; font-family:Verdana,Tahoma;box-sizing: border-box;}
+select {  width:100%;  border: 0;  padding:5px;  margin:0;  font-size: 12pt;  color: #555;  margin-bottom: 3px;box-sizing: border-box;}
+input {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
+.btn {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
+#postpone {display: block;    font: italic 12px Arial;    color: darkblue;    background: #DDD;    height: 30px;  margin-bottom:5px;   padding:3px;  margin-right:5px;   white-space: pre-line;}
+.dd {box-sizing: border-box;}

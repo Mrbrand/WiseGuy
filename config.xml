@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!-- widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.phonegap.example"
+        versionCode = "10" 
+        version     = "1.0.0" -->
+        
+         <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "betarabbit.wiseguy"
+        versionCode = "14" 
+        version     = "1.1.1">
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>WiseGuy</name>
+
+    <description>
+        Task manager
+    </description>
+
+    <author href="http://betarabbit.com" email="peter.brand79@gmail.com">
+        Peter Brand 
+    </author>
+
+	<preference name="orientation" value="portrait" /> 
+
+<!-- Default application icon -->
+<icon src="img/icon.png" />
+
+<!--
+    Default icon should work, but cordova don't overwrite
+    the default on all densities
+-->
+<icon src="img/icon.png" platform="android" density="ldpi" />
+<icon src="img/icon.png" platform="android" density="mdpi" />
+<icon src="img/icon.png" platform="android" density="hdpi" />
+<icon src="img/icon.png" platform="android" density="xhdpi" />
+</widget>
