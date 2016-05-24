@@ -318,15 +318,23 @@ $(document).on('click', ".cancel-button", function() {
     $("body").scrollTop(scroll_position);
  });
 
+
 // .delete-button
 $(document).on('click', ".delete-button", function() {
 	id = $(".item-id").val();
 	if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
-	   itemList.remove_item(id);
-		if(view=="tree")	view_item(current.id);
-		else view_filter();
-		$("body").scrollTop(scroll_position);
-	}
+        
+        var all_subitems = itemList.child_tree(id);  
+        all_subitems.forEach(function(item){
+            itemList.remove_item(item.id);
+        });
+        
+        itemList.remove_item(id);
+    	 
+        if(view=="tree")	view_item(current.id);
+    	else view_filter();
+        $("body").scrollTop(scroll_position);
+    }
  });
  
  // .finish-button
