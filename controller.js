@@ -322,10 +322,10 @@ $(document).on('click', ".cancel-button", function() {
 $(document).on('click', ".delete-button", function() {
 	id = $(".item-id").val();
 	if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
-   itemList.remove_item(id);
-	if(view=="tree")	view_item(current.id);
-	else view_filter();
-    $("body").scrollTop(scroll_position);
+	   itemList.remove_item(id);
+		if(view=="tree")	view_item(current.id);
+		else view_filter();
+		$("body").scrollTop(scroll_position);
 	}
  });
  
@@ -643,7 +643,7 @@ $(document).on('click', "#import-button", function() {
     }
 });
  
-// #export-button
+// #export all-button
 $(document).on('click', "#export-button", function() {
     var items = itemList.get_all_items().query("finish_date","==","");
     var items_string = JSON.stringify(items);
@@ -653,3 +653,17 @@ $(document).on('click', "#export-button", function() {
     $(".page").hide();
     $("#export").show();
 });
+
+
+// #export subtree-button
+$(document).on('click', "#export-subtree-button", function() {
+    var items = itemList.child_tree(current.id);
+	items = items.concat(itemList.get_item(current.id));
+    var items_string = JSON.stringify(items);
+    console.log(items);
+    console.log(items_string);
+    $("#export").html(items_string);
+    $(".page").hide();
+    $("#export").show();
+});
+

@@ -48,6 +48,21 @@ var itemList = {
         }
 	},
     
+    child_tree : function(id){
+        var subitems = itemList.get_subitems(id);
+        var all_items = [];
+        all_items = all_items.concat(subitems); 
+           // console.log(subitems);
+        
+        subitems.forEach(function(item) {
+            
+            all_items = all_items.concat(itemList.child_tree(item.id)); 
+            //console.log(all_items);
+        });
+        return all_items;
+    },
+    
+    
     update_postpone : function() {     
         postponed_items = itemList.get_all_items().query("postpone","!=","");
         //console.log(postponed_items);
