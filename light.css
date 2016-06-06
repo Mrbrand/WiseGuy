@@ -1,11 +1,14 @@
 /* bakgrund*/
-body {margin:0;  font-family:Verdana,Tahoma;background:#78A;}
+body {margin:0;  font-family:Verdana,Tahoma;background:#A0A040;}
 
 /* Där titel och knapp för Tree/Filter är*/
-.header{background:#78A;}
+.header{background:#A0A040;}
 
 /* Där back och new knapp sitter*/
-.controls{background: -webkit-linear-gradient(#567, #345);}
+.controls{background: -webkit-linear-gradient(#333300, #1a1a00);}
+
+/* Filter läge */
+#search .header{background:#808000;}
 
 .project{ 
     background: -webkit-linear-gradient(#FFF, #CCC);
@@ -29,9 +32,7 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#78A;}
 
 
 
-#search .header{background:#364;}
-#search .controls{background: -webkit-linear-gradient(#252, #030);}
-#search {background:#7A9;}
+
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
 /* Palette URL: http://paletton.com/#uid=11s0u0klEbJdslfgrezqD7PyY3T */
