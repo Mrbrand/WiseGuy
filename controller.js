@@ -212,6 +212,7 @@ $(document).on('click', ".subitem-center", function() {
 $(document).on('click', ".add-button", function() {
     itemList.add_from_form("#new-item-form");
     awesomplete.list = itemList.get_quicklist();
+    awesomplete2.list = itemList.get_quicklist();
 	view_item(current.id);
  });
 
@@ -220,6 +221,7 @@ $(document).on('click', ".add-button", function() {
 $(document).on('click', ".save-button", function() {
    itemList.edit_from_form("#edit-item-form");
    awesomplete.list = itemList.get_quicklist();
+   awesomplete2.list = itemList.get_quicklist();
 	if(view=="tree")	view_item(current.id);
 	else view_filter();
     $("body").scrollTop(scroll_position);
@@ -441,7 +443,8 @@ function view_item (id) {
     var diff;
     var output = "";
     
-    $(".menu-title").html(itemList.get_item(id).title);
+    //$(".menu-title").html(itemList.get_item(id).title);
+    $("#quick_search").val(itemList.get_item(id).title);
 	// var query = $("#search-item").val().toLowerCase();
     
     // gömma Back-knapp för Root item
