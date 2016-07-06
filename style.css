@@ -40,7 +40,6 @@ input[type=radio]:checked + label>img {
       margin:0;
       height:45px;
       font-size: 12pt;
-      color: #FFF;
       display: block;
     }
     

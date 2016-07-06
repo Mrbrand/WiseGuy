@@ -13,8 +13,6 @@ var new_item_type =  $("#new-item-type").msDropDown().data("dd");
 var preferences = {};
 var scroll_position = 0;
 
-var input_parent = document.getElementById("parent");
-var awesomplete = new Awesomplete(input_parent);
 
 // Initiera itemslista från local storage
 itemList.init("wiseguy_items");
@@ -24,8 +22,6 @@ else if(itemList.itemArray==null) itemList.exampledata();
 view_item(0);
 
 
-awesomplete.list = itemList.get_quicklist();
-
 // Initiera Inställningar från local storage  
 var preferences = window.localStorage.getItem("wiseguy_preferences");
 if (preferences == undefined | preferences == null | preferences == "") 
@@ -34,7 +30,15 @@ preferences = window.localStorage.getItem("wiseguy_preferences");
 
 set_preferences();
 
+//awesomlete
+var input_parent = document.getElementById("parent");
+var awesomplete = new Awesomplete(input_parent);
 
+var input_search = document.getElementById("quick_search");
+var awesomplete2 = new Awesomplete(input_search);
+
+awesomplete.list = itemList.get_quicklist();
+awesomplete2.list = itemList.get_quicklist();
 
 
 /*****************************************************************************/
@@ -50,12 +54,29 @@ Sortable.create(list, {handle: '.subitem-right',onSort: function (evt) {
 }});
 
 window.addEventListener("awesomplete-selectcomplete", function(e){
-    console.log($("#parent").val());
-    str = $("#parent").val()
-    pos = str.indexOf("#");
-    id = parseInt(str.substr(pos+1));
-    $(".item-parent-id").val(id);
+    
+    switch($(e.target)[0].id) 
+        {
+            //event via edit meny
+            case "parent": 
+               	str = $("#parent").val()
+				pos = str.indexOf("#");
+				id = parseInt(str.substr(pos+1));
+				$(".item-parent-id").val(id);
+                break;
+            //event via tree meny   
+            case "quick_search": 
+               	str = $("#quick_search").val()
+				pos = str.indexOf("#");
+				id = parseInt(str.substr(pos+1));
+				 view_item (id);
+                break;
+            default:
+            console.log("miss");
+         }
+   
 }, false);
+
 
 $(document).on('focus', "#parent", function() {
  $("#parent").val("");
