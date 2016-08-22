@@ -82,8 +82,12 @@
 			
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px;">
-                <input class="search" onkeyup="view_filter();" placeholder="Title search" value="" style="width:100px; float:left; margin-right:5px;"/>
-                <div id="path-buttons" style="float:left;"></div>
+                <button onclick=" $('.type-filter').val('');$('.path-filter').val('');$('.context-filter').val('');view_filter();" style="float:left; margin-right:5px;">Rst</button>
+                
+                <button onclick=" $('.type-filter').val('7');view_filter();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button>
+                
+                 <div id="path-buttons" style="float:left;"></div>
                 
                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
                 
@@ -91,8 +95,6 @@
             
         <! Controls categories>
             <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px;">
-                <button onclick=" $('.type-filter').val('7');view_filter();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button>
                 <div id="prefefined" style="float:left;"></div>
             </div><!-- end controls categories-->
        
@@ -103,7 +105,8 @@
             
         <!Title-filter>
             <div id="controls-title" class="controls-extra" style="display:none;">
-                
+                <input class="search" onkeyup="view_filter();" placeholder="Title search" value="" style="width:100px; float:left; margin-right:5px;"/>
+               
                 <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
                 <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>
                 <button onclick=" $('.type-filter').val('7'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type7.png" height="16"/></button>
@@ -498,18 +501,18 @@
 
 
 <script id="filter_buttons_template" type="text/template">
-    <button onclick="$('.context-filter').val('{{slot1}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot1}}</button>
-    <button onclick="$('.context-filter').val('{{slot2}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot2}}</button>
-    <button onclick="$('.context-filter').val('{{slot3}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot3}}</button>
-    <button onclick="$('.context-filter').val('{{slot4}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot4}}</button>
-    <button onclick="$('.context-filter').val('{{slot5}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot5}}</button>
-    <button onclick="$('.context-filter').val('{{slot6}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot6}}</button>
-    <button onclick="$('.context-filter').val('{{slot7}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot7}}</button>
-    <button onclick="$('.context-filter').val('{{slot8}}'); $('.status-filter').val('open'); $('.type-filter').val('6'); $('.path-filter').val(''); view_filter();">{{slot8}}</button>
+    <button onclick="$('.context-filter').val('{{slot1}}'); $('.status-filter').val('open'); view_filter();">{{slot1}}</button>
+    <button onclick="$('.context-filter').val('{{slot2}}'); $('.status-filter').val('open'); view_filter();">{{slot2}}</button>
+    <button onclick="$('.context-filter').val('{{slot3}}'); $('.status-filter').val('open'); view_filter();">{{slot3}}</button>
+    <button onclick="$('.context-filter').val('{{slot4}}'); $('.status-filter').val('open'); view_filter();">{{slot4}}</button>
+    <button onclick="$('.context-filter').val('{{slot5}}'); $('.status-filter').val('open'); view_filter();">{{slot5}}</button>
+    <button onclick="$('.context-filter').val('{{slot6}}'); $('.status-filter').val('open'); view_filter();">{{slot6}}</button>
+    <button onclick="$('.context-filter').val('{{slot7}}'); $('.status-filter').val('open'); view_filter();">{{slot7}}</button>
+    <button onclick="$('.context-filter').val('{{slot8}}'); $('.status-filter').val('open'); view_filter();">{{slot8}}</button>
 </script>	
 
 <script id="path_button_template" type="text/template">
-    <button onclick="$('.path-filter').val('//{{title}}/');  $('.type-filter').val('7'); $('.search').val(''); view_filter();">{{icon}}</button>
+    <button onclick="$('.path-filter').val('//{{title}}/');  view_filter();">{{icon}}</button>
 </script>
 
 	
