@@ -32,7 +32,7 @@
         
         <script src="javascript/sortable.js"></script>
 		
-	</head
+	</head>
 	
 	
 	<body>
@@ -83,21 +83,22 @@
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px;">
                 <input class="search" onkeyup="view_filter();" placeholder="Title search" value="" style="width:100px; float:left; margin-right:5px;"/>
+                <div id="path-buttons" style="float:left;"></div>
                 
-                <button onclick=" $('.type-filter').val('7'); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();$('#controls-context').hide();$('#controls-path').show();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); $('.path-filter').val(''); $('.context-filter').val(''); view_filter();$('#controls-context').show();$('#controls-path').hide();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button>
                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
                 
             </div><!-- end controls-->
             
         <! Controls categories>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px;display:none;">
-                <div id="path-buttons" style="float:left;"></div>
+            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px;">
+                <button onclick=" $('.type-filter').val('7');view_filter();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button>
+                <div id="prefefined" style="float:left;"></div>
             </div><!-- end controls categories-->
        
         <! Controls context>
             <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
-            	<div id="prefefined" style="float:left;"></div>
+            	
             </div><!-- end controls context-->
             
         <!Title-filter>

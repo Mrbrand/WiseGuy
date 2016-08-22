@@ -19,13 +19,14 @@ itemList.init("wiseguy_items");
 if (itemList.itemArray==undefined) itemList.exampledata();
 else if(itemList.itemArray==null) itemList.exampledata();
 //itemList.filtered("all","");
-view_item(0);
+
+view_filter();   
 
 
 // Initiera Inställningar från local storage  
 var preferences = window.localStorage.getItem("wiseguy_preferences");
 if (preferences == undefined | preferences == null | preferences == "") 
-    window.localStorage.setItem("wiseguy_preferences",'{"slot1":"0", "slot2":"0", "slot3":"0", "slot4":"0", "slot5":"0", "background_color": "", "controls_color":""}');
+    window.localStorage.setItem("wiseguy_preferences",'{"slot1":"📝", "slot2":"📞", "slot3":"📐", "slot4":"💻", "slot5":"💳", "slot6":"💬","slot7":"🏠","slot8":"🎬", "background_color": "", "controls_color":""}');
 preferences = window.localStorage.getItem("wiseguy_preferences");
 
 set_preferences();
