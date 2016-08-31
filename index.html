@@ -89,13 +89,14 @@
                 
                  <div id="path-buttons" style="float:left;"></div>
                 
-               <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
+                <input class="search" onkeyup="view_filter();" placeholder="Tag search" value="" style="width:100px; float:left; margin-left:5px;"/>
                 
             </div><!-- end controls-->
             
         <! Controls categories>
             <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px;">
                 <div id="prefefined" style="float:left;"></div>
+                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
             </div><!-- end controls categories-->
        
         <! Controls context>
@@ -105,7 +106,7 @@
             
         <!Title-filter>
             <div id="controls-title" class="controls-extra" style="display:none;">
-                <input class="search" onkeyup="view_filter();" placeholder="Title search" value="" style="width:100px; float:left; margin-right:5px;"/>
+               
                
                 <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
                 <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>

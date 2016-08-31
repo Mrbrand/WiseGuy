@@ -530,7 +530,7 @@ function view_item (id) {
     filtered_items = itemList.get_all_items();
     
     // filtrera title om fält är satt
-    if (query) filtered_items = filtered_items.query("title", "contains", query);
+    if (query) filtered_items = filtered_items.query("notes", "contains", query);
     
     // filtrera path om fält är satt
     if (path) filtered_items = filtered_items.query("path", "contains", path);
