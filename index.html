@@ -23,6 +23,7 @@
         <script language="JavaScript" type="text/javascript" src="javascript/moment.min.js"></script>
 		<script language="JavaScript" type="text/javascript" src="javascript/mustache.js"></script>	
 		<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.3.min.js"></script> 
+		<script language="JavaScript" type="text/javascript" src="javascript/thenby.js"></script>
         <!--script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script-->
 		<script language="JavaScript" type="text/javascript" src="javascript/jquery.detect_swipe.js"></script> 
 		<!--script language="JavaScript" type="text/javascript" src="javascript/tinysort.js"></script-->
@@ -39,40 +40,38 @@
 	
 	
 	
-		<!--TREE PAGE -------------->
-			<div id="tree" class="page" style="display:block; min-height:450px;">
-			  
-			<div class="header">
-				<!--div class="menu-title">Root</div-->
-				<input id="quick_search" type="text" onclick="this.value='';" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
-				<img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
-                <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
-			</div> <!--end header-->
-			
-			<!--Sub-meny-->
-			<div class="controls">
-				<button class="home-button"><img src="img/home16.png"</button>
-				<button class="back-button">Back</button>
-				
-				
-                <button class="new-button">New</button>
-                
-                <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
-                <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
-    	
-			</div><!-- end controls-->
-			
-			<!-- Projektlista -->
-			<div id="items">
-				<div id="open" class="list-group"></div>
-				<div id="finished"></div>
-			</div><!-- end items--> 
-			
-		</div><!-- end page-->
+<!--SINGLE ISSUE PAGE -------------->
+	<div id="single_issue" class="page" style="display:block; min-height:450px;">
+	  
+	<div class="header">
+		<!--div class="menu-title">Root</div-->
+		<input id="quick_search" type="text" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
+		<img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
+        <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+	</div> <!--end header-->
+	
+	<!--Sub-meny-->
+	<div class="controls">
+		<!--button class="home-button"><img src="img/home16.png"</button-->
+		<button class="back-button">Back</button>
+        <button class="new-task-button" style="float:right;">New</button>
+        
+        <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
+        <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
+
+	</div><!-- end controls-->
+	
+	<!-- Projektlista -->
+	<div id="items">
+		<div id="open" class="list-group"></div>
+		<div id="finished"></div>
+	</div><!-- end items--> 
+	
+</div><!-- end page-->
 
 		
-<!--SEARCH PAGE -------------->
-	<div id="search" class="page">
+<!--ISSUES PAGE -------------->
+	<div id="issues" class="page">
 			  
 			<div class="header">
 				<div style="float:left;">Filter</div>
@@ -89,8 +88,8 @@
                 
                  <div id="path-buttons" style="float:left;"></div>
                 
-                <input class="search" onkeyup="view_filter();" placeholder="Tag search" value="" style="width:60px; float:left; margin-left:5px;"/>
-                
+                <input class="search" onkeyup="view_issue_list();" placeholder="Tag search" value="" style="width:60px; float:left; margin-left:5px;"/>
+                <button class="new-issue-button" style="float:right;">New</button>
             </div><!-- end controls-->
             
         <! Controls categories>
@@ -177,16 +176,6 @@
 			  
 			  <! TITLE>
 				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
-			  <! TYPE>	
-				<select id="new-item-type" class="drop_with_images" name="type" style="width:100%; margin-bottom:5px;">
-                    <option value="4" data-image="img/type4.png">Idea</option>
-                    <option value="6" data-image="img/type6.png">Task</option>
-                    <option value="7" data-image="img/type7.png">Project</option>
-                    <option value="5" data-image="img/type5.png">Problem</option>
-                    <option value="15" data-image="img/type15.png">Vision</option> 
-        			<option value="13" data-image="img/type13.png">Category</option>  
-				</select><br/>
-     		
      		
      		<! CONTEXT>
         		<span class="field-description">Context</span>  
@@ -218,7 +207,9 @@
 				
 			 <! hidden >
                 <input type="hidden" name="order" id="new-order" />
+                <input type="hidden" name="type" />
 				<input type="hidden" name="parent_id" id="new-parent-id" value="0"/>
+				<input type="hidden" name="finish_date"  value=""/>
 				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
 				
 			</form>
@@ -247,17 +238,6 @@
 				
 			<! TITLE >
 				<input class="title" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
-				
-			<! TYPE >
-				<select id="edit-item-type" class="drop_with_images" name="type" style="width:100%; margin-bottom:5px;">
-                    <option value="4" data-image="img/type4.png">Idea</option>
-                    <option value="6" data-image="img/type6.png">Task</option>
-                    <option value="7" data-image="img/type7.png">Project</option>
-                    <option value="5" data-image="img/type5.png">Problem</option>
-                    <option value="15" data-image="img/type15.png" style="height:24px;">Vision</option> 
-    				<option value="13" data-image="img/type13.png">Category</option>   
-				</select>
-
 
 		<! CONTEXT>
         		<span class="field-description">Context</span>  
@@ -273,7 +253,7 @@
         <! PRIO>
          		<span class="field-description">Prio</span>  
          		<div style="margin: 10px 0;">
-		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+		           		<label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
   						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
   						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
   						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
@@ -292,7 +272,7 @@
 				
 									
 			<! NOTES >
-				<textarea class="item-notes" name="notes" rows="10" placeholder="Notes"></textarea>
+				<textarea class="item-notes" name="notes" rows="8" placeholder="Notes"></textarea>
 
 			<! MORE BUTTON >
 				<center>
@@ -300,11 +280,15 @@
 				</center>
 				
 				<div class="more" style="display:none;">
-                    <! hidden >
-					<input class="item-id" name="id" type="hidden" /> <br/>
-    				<input class="item-parent-id" name="parent_id" type="hidden"/><br/>	
-    				<input id="order" type="hidden" name="order" />
-                    	
+                    
+                    <!HIDDEN>
+                    <div style="display:none;" >
+						<input class="item-id" name="id" type="text" /> <br/>
+						<input name="parent_id" type="text"/><br/>	
+						<input name="type" type="text" /> <br/>
+						<input id="order" type="text" name="order" />
+                    </div>	
+                    
                     	<! PARENT >
                     <span class="field-description">Parent item in tree</span>
         				<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
