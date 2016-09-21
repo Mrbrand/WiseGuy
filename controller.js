@@ -1,5 +1,5 @@
 /* INIT *******************************************************************/
-var itemList = new Carbon("wiseguy_items");
+var itemList = new Carbon("wiseguy2_items");
 var view="issue_list";
 var current={};
 
