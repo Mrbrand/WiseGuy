@@ -120,8 +120,6 @@ $(".save-button").click(function() {
 });
 
 
-
-
 // GOTO EDIT .subitem-left 
 $(document).on('click', ".subitem-left", function() {
 	
@@ -149,7 +147,7 @@ $(document).on('click', ".subitem-left", function() {
 });
 
 // GOTO SINGLE ISSUE
-$(document).on('click', ".subitem-center", function() {
+$(document).on('click', ".issue .subitem-center", function() {
 	
 	id = $(this).parent().find(".item_id").text();
 	edit_item = itemList.get_item(id);

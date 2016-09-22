@@ -10,7 +10,7 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#A0A040;}
 /* Filter läge */
 #search .header{background:#808000;}
 
-.project{ 
+.item{ 
     background: -webkit-linear-gradient(#FFF, #CCC);
     color: #333;
 }

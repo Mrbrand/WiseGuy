@@ -359,7 +359,7 @@
 
 <!-- Mustache template issue-->
 <script id="issue_template" type="text/template">
-	<div class="subitem project {{#postpone}} postponed{{/postpone}}">
+	<div class="item issue {{#postpone}} postponed{{/postpone}}">
 						
 		<div class="subitem-left quick_edit_item">
 			
@@ -403,7 +403,7 @@
 
 <!-- Mustache template öppna tasks-->
 <script id="open_task_template" type="text/template">
-	<div class="subitem project {{#postpone}} postponed{{/postpone}}">
+	<div class="item task {{#postpone}} postponed{{/postpone}}">
 						
 		<div class="subitem-left quick_edit_item">
 			
@@ -439,7 +439,7 @@
 	
 <!-- Mustache template avslutade -->
 <script id="finished_task_template" type="text/template">
-	<div class="subitem finished project">
+	<div class="item task finished">
 						
 		<div class="subitem-left quick_edit_item">
 			<img class="prio-icon" src="img/prio{{prio}}.png"/>
