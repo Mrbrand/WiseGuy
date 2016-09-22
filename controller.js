@@ -37,8 +37,9 @@ $(".cancel-button").click(function() {
 $(".delete-button").click(function() {
 	id = $("#edit-item-form .item-id").val();
     if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
-    itemList.remove_item(id);
-    view_issue_list();
+		itemList.remove_item(id);
+		if(view == "issue_list") view_issue_list();
+		else view_single_issue(current.id);
     }
 });
 
@@ -86,28 +87,22 @@ $(".more-button").click(function() {
  
  
 $(".new-issue-button").click(function() {
-	$('#new-item-form input[name="type"]').val("7"); 
-	$('#new-item-form textarea[name="title"]').val(""); 
-    $('#new-item-form input[name="notes"]').val(""); 
-    $('#new-item-form textarea[name="genre"]').val(""); 
-    $('#new-item-form textarea[name="grade"]').val(""); 
+	$('#new-item-form .autovalue').val(""); 
+    $('#new-item-form input[name="type"]').val("7"); 
 	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
 	
 	open_page ("#new");
+	$("#new-item-form [name='title'] ").focus();
 });
 
 $(".new-task-button").click(function() { 
-	
+	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
-    $('#new-item-form textarea[name="title"]').val(""); 
-    $('#new-item-form input[name="notes"]').val(""); 
-    $('#new-item-form textarea[name="genre"]').val(""); 
-    $('#new-item-form textarea[name="grade"]').val(""); 
 	$('#new-item-form input[name="parent_id"]').val(current.id); 
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
 	
-	$(".page").hide();
-	$("#new").show();
+	open_page ("#new");
+	$("#new-item-form [name='title'] ").focus();
 });
 
 
@@ -192,9 +187,12 @@ function view_issue_list(){
 
   	//mustache output
    	$("#filtered").empty();    
+  	
   	open_items.forEach(function(item) {
+		item_meta = item_with_meta(item.id);
+		
 		var template = $('#issue_template').html();
-		var html = Mustache.to_html(template, item);
+		var html = Mustache.to_html(template, item_meta);
 		$("#filtered").append(html);
 	});
 
@@ -286,3 +284,18 @@ function reorder(item_id, from_pos, to_pos){
     itemList.save(); 
 }
 
+function item_with_meta(id){
+	var item = JSON.parse(JSON.stringify(itemList.get_item(id)));
+	open_tasks = itemList.get_all().query("finish_date","==","").query("parent_id", "==", id);
+    finished_tasks = itemList.get_all().query("finish_date","!=","").query("parent_id", "==", id);
+    
+    // sortera array med items
+	open_tasks.sort(firstBy("order").thenBy("update_date", -1) );
+	finished_tasks.sort(firstBy("finish_date"));
+	console.log(open_tasks);
+	item.subitems = open_tasks[0];
+	item.open_task_count = open_tasks.length;
+	item.finished_task_count = finished_tasks.length;
+	
+	return item;
+}

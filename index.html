@@ -161,13 +161,13 @@
 			<form id="new-item-form">
 			  
 			  <! TITLE>
-				<textarea  id="new-item-title" name="title" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
+				<textarea name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
      		
      		<! CONTEXT>
         		<span class="field-description">Context</span>  
         		
         		<div style="display:inline;">
-        			<input class="context-icon" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
+        			<input name="icon" class="autovalue" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
@@ -186,17 +186,16 @@
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
 		    <! POSTPONE>
-                <input id="new-item-postpone" type="date" name="postpone" min="2015-11-17" max="2025-12-31" />
+                <input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
          
              <! NOTES>       
-				<textarea id="new-item-notes" name="notes" placeholder="Notes" rows="10"></textarea>
+				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
 				
 			 <! hidden >
-                <input type="hidden" name="order" id="new-order" />
-                <input type="hidden" name="type" />
-				<input type="hidden" name="parent_id" id="new-parent-id" value="0"/>
-				<input type="hidden" name="finish_date"  value=""/>
-				<input type="hidden" name="status" value="open" placeholder="Status" style="margin-bottom:5px;"/>
+                <input name="order" value="0"  type="hidden" />
+                <input name="type"  class="autovalue" type="hidden" />
+				<input name="parent_id" class="autovalue" type="hidden" />
+				<input name="finish_date"  value="" type="hidden" />
 				
 			</form>
 			<br/><br/><br/><br/><br/><br/><br/>
@@ -369,7 +368,11 @@
             <img class="prio-icon" src="img/prio{{prio}}.png"/>
             <!--span style="color:#888;">{{order}}</span-->
 		</div>
-        
+         
+         <div class="subitem-right" style="width:60px; float: right;  height:40px; padding:15px 10px 10px 10px;">
+    		<span style="font-size:16pt; color: gray;">{{open_task_count}}<span style="font-size:12pt; color: gray;">/{{finished_task_count}}</span></span>
+		</div>
+		
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
 			<div class="next_action_div" style="float:left;">
@@ -384,6 +387,8 @@
 				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->
+		 
+		
 		 
 		<div style="clear:both;"></div>
 		
@@ -418,13 +423,6 @@
 			<div class="next_action_div" style="float:left;">
 				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
-				{{#subitems}}
-					{{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
-					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
-					<span class="next_action">{{title}}</span>
-					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
-                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
-				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->
 		 
@@ -454,7 +452,6 @@
 			<div class="next_action_div" style="float:left;">
 				<span class="finish_date">{{finish_date}}</span>
 				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
-				
 			</div>
 		</div><!-- end subitem-center -->
 		 
