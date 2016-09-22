@@ -126,23 +126,9 @@
                  <button class="status-button" onclick="togggleStatus();" style="float:right;margin-left:5px;">Status</button>
                  <input class="path-filter" type="text" onkeyup="view_filter();" placeholder="Path string" value="" style="width:70px; margin-right:5px;"/>
                  <input class="context-filter" type="text" onkeyup="view_filter();" placeholder="Context icon" value="" style="width:70px; margin-right:5px;"/>
-                 
-                <!--div style="float:left;">
-               		<button onclick="$('.search').val(''); view_filter();" style="margin-left:5px;">Clr</button>
-                </div-->
                 
             </div><!-- end controls-->
             
-            <!Type-filter>
-            <!--div id="controls-type" class="controls-extra">
-                <!--button class="status-button" onclick="$('#controls-status').toggle();" style="float:left;margin-left:5px;">Status</button-->
-                <!--input class="type-filter" type="hidden"/>
-            </div><!-- end controls-->
-            
-            <!Path-filter>
-            <!--div id="controls-path" class="controls-extra">
-                <div id="root-items" style="float:left;"></div>
-            </div><!-- end controls-->
             
             <!Status-filter>
             <div id="controls-status" style="display:none;" >
@@ -237,13 +223,13 @@
 			<form id="edit-item-form">
 				
 			<! TITLE >
-				<input class="title" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
+				<input class="autovalue" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
 
 		<! CONTEXT>
         		<span class="field-description">Context</span>  
   
         		<div style="display:inline;">
-        			<input class="context-icon" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
+        			<input class="autovalue" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
@@ -264,7 +250,7 @@
            
          <! POSTPONE >   
                 <span class="field-description">Postpone</span>    
-				<input id="postpone" type="text" name="postpone" placeholder="Postpone to..." />
+				<input class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
 				
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd')); $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
@@ -272,43 +258,43 @@
 				
 									
 			<! NOTES >
-				<textarea class="item-notes" name="notes" rows="8" placeholder="Notes"></textarea>
+				<textarea class="autovalue" name="notes" rows="8" placeholder="Notes"></textarea>
 
 			<! MORE BUTTON >
 				<center>
 					<button class="more-button" type='button'>More options</button>
 				</center>
 				
-				<div class="more" style="display:none;">
+				<div class="more extra" style="display:none;">
                     
                     <!HIDDEN>
                     <div style="display:none;" >
-						<input class="item-id" name="id" type="text" /> <br/>
-						<input name="parent_id" type="text"/><br/>	
-						<input name="type" type="text" /> <br/>
-						<input id="order" type="text" name="order" />
+						<input class="item_id autovalue" name="id" type="text" /> <br/>
+						<input class="autovalue" name="parent_id" type="text"/><br/>	
+						<input class="autovalue" name="type" type="text" /> <br/>
+						<input class="autovalue" type="text" name="order" />
                     </div>	
                     
                     	<! PARENT >
                     <span class="field-description">Parent item in tree</span>
-        				<input id="parent" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+        				<input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
                     
                     <! RESPAWN >
                     <span class="field-description">Make item respawn after finish</span>
-                    <input id="repeat" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
+                    <input class="autovalue" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
                                         
                	
      			<! CREATED >                                                   
                     <span class="field-description">Item created</span>
-					<input class="start_date" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
+					<input class="autovalue" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
                     
                  <! UPDATED >
                     <span class="field-description">Last updated</span>
-    				<input class="update_date" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+    				<input class="autovalue" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 					
 					<! FINISHED >
                     <span class="field-description">Finish date</span>
-					<input class="finish_date" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+					<input class="autovalue" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 					
 				</div>
 				
@@ -372,9 +358,46 @@
 </html>
 
 
+<!-- Mustache template issue-->
+<script id="issue_template" type="text/template">
+	<div class="subitem project {{#postpone}} postponed{{/postpone}}">
+						
+		<div class="subitem-left quick_edit_item">
+			
+    		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
+            <img class="prio-icon" src="img/prio{{prio}}.png"/>
+            <!--span style="color:#888;">{{order}}</span-->
+		</div>
+        
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="next_action_div" style="float:left;">
+				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
+				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
+				{{#subitems}}
+					{{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
+					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
+					<span class="next_action">{{title}}</span>
+					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
+                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
+				{{/subitems}}
+			</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="prio" style="display:none;">{{prio}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+		<span class="size" style="display:none;">{{size}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
 
-<!-- Mustache template öppna-->
-<script id="open_items_template" type="text/template">
+
+<!-- Mustache template öppna tasks-->
+<script id="open_task_template" type="text/template">
 	<div class="subitem project {{#postpone}} postponed{{/postpone}}">
 						
 		<div class="subitem-left quick_edit_item">
@@ -417,7 +440,7 @@
 	
 	
 <!-- Mustache template avslutade -->
-<script id="finished_items_template" type="text/template">
+<script id="finished_task_template" type="text/template">
 	<div class="subitem finished project">
 						
 		<div class="subitem-left quick_edit_item">
