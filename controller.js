@@ -53,7 +53,7 @@ $("#export-button").click(function() {
 
 
 $(".finish-button").click(function() {
-        item = itemList.get_item($(".item-id").val());
+        item = itemList.get_item($("#edit-item-form .item-id").val());
         itemList.edit_from_form("#edit-item-form");
         
         /*if(item.repeat){
