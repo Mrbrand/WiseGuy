@@ -39,68 +39,37 @@
 	<body>
 	
 
-
-
-<!--SINGLE ISSUE PAGE -------------->
-	<div id="single_issue" class="page" style="display:block; min-height:450px;">
-	  
-	<div class="header">
-		<!--div class="menu-title">Root</div-->
-		<input id="quick_search" type="text" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
-		<!img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
-        <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
-	</div> <!--end header-->
-	
-	<!--Sub-meny-->
-	<div class="controls">
-		<!--button class="home-button"><img src="img/home16.png"</button-->
-		<button class="back-button">Back</button>
-        <button class="new-task-button" style="float:right;">New</button>
-        
-        <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
-        <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
-
-	</div><!-- end controls-->
-	
-	<!-- Projektlista -->
-	<div id="items">
-		<div id="open" class="list-group"></div>
-		<div id="finished"></div>
-	</div><!-- end items--> 
-	
-</div><!-- end page-->
-
 		
 <!--ISSUES PAGE -------------->
 	<div id="issues" class="page">
 			  
 			<div class="header">
+				
 				<div style="float:left;">
 				<select id="category_filter" class="category_select">
 					<option value="*">-All-</option>
-					<option value="undefined">-No category-</option>
+					<option value="-">-No category-</option>
 					<option value="edit">Edit...</option>
 				</select>
 				</div>
+			
 				<img class="tree-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
                 <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px;">
-                <button onclick=" $('.type-filter').val('');$('.path-filter').val('');$('.context-filter').val('');view_filter();" style="float:left; margin-right:5px;">Rst</button>
                 
-                <button onclick=" $('.type-filter').val('7');view_filter();" style="float:left; margin-right:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-right:5px;"><img src="img/type6.png" height="16"/></button>
-                
-                 <div id="path-buttons" style="float:left;"></div>
-                
-                <input class="search" onkeyup="view_issue_list();" placeholder="Tag search" value="" style="width:60px; float:left; margin-left:5px;"/>
+                <input class="search" onkeyup="view_issue_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
+                	
+					<input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
+					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
+				
                 <button class="new-issue-button" style="float:right;">New</button>
             </div><!-- end controls-->
             
         <! Controls categories>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px;">
+            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
                 <div id="prefefined" style="float:left;"></div>
                 <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
             </div><!-- end controls categories-->
@@ -152,8 +121,38 @@
 			
 		</div><!-- end page-->
 		
+
+
+
 			
-			
+<!--SINGLE ISSUE PAGE -------------->
+	<div id="single_issue" class="page" style="display:block; min-height:450px;">
+	  
+	<div class="header">
+		<div class="menu-title">Root</div>
+		<!img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
+        <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+	</div> <!--end header-->
+	
+	<!--Sub-meny-->
+	<div class="controls">
+		<!--button class="home-button"><img src="img/home16.png"</button-->
+		<button class="back-button" style="float:left;">Back</button>
+        <button class="new-task-button" style="float:right;">New</button>
+        
+        <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
+        <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
+
+	</div><!-- end controls-->
+	
+	<!-- Projektlista -->
+	<div id="items">
+		<div id="open" class="list-group"></div>
+		<div id="finished"></div>
+	</div><!-- end items--> 
+	
+</div><!-- end page-->
+
 			
 			
 <!--CATEGORIES PAGE ----------------------------------------------------------------------->
@@ -161,7 +160,7 @@
 	  
 	<!--Header -->
 	<div class="header">
-		<input id="quick_search" type="text" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
+		<div class="menu-title">Categories</div>
 	</div> <!--end header-->
 	
 	<!--Sub-meny-->
@@ -293,12 +292,14 @@
            
          <! POSTPONE >   
                 <span class="field-description">Postpone</span>    
+				<input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
+				<!--
 				<input class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
 				
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd')); $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
-				
+				-->
 									
 			<! NOTES >
 				<textarea class="autovalue" name="notes" rows="8" placeholder="Notes"></textarea>

@@ -14,14 +14,11 @@ items.forEach(function(item) {
 Sortable.create(document.getElementById('open'), {handle: '.subitem-right',onSort: function (evt) {
     var tasks  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", current.id);
     reorder(tasks, evt.oldIndex, evt.newIndex);
-    console.log("task");
 }});
 
 Sortable.create(document.getElementById('categories'), {handle: '.subitem-right',onSort: function (evt) {
     var categories=itemList.get_all().query("type", "==", 13);
-    //var categories  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", current_id);
     reorder(categories, evt.oldIndex, evt.newIndex);
-    console.log("cat");
 }});
 
 set_categories();
@@ -113,7 +110,9 @@ $(".new-issue-button").click(function() {
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
 	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
-	$('#new-item-form select[name="category"]').val("-"); 
+	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
+	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
+	
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
 });
@@ -125,7 +124,7 @@ $(".new-task-button").click(function() {
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val(current.id); 
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
-	
+	$('#new-item-form select[name="category"]').val(current.category); 
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
 });
@@ -159,6 +158,9 @@ $(".save-button").click(function() {
    
 });
 
+$("#show_postponed").change(function() { 
+    view_issue_list();
+}); 
 
 // GOTO EDIT  
 $(document).on('click', ".subitem-left", function() {
@@ -181,6 +183,9 @@ $(document).on('click', ".subitem-left", function() {
 // GOTO SINGLE ISSUE
 $(document).on('click', ".issue .subitem-center", function() {
 	id = $(this).parent().find(".item_id").text();
+	issue = itemList.get_item(id);
+
+	$("#single_issue .menu-title").text(issue.title)
 	edit_item = itemList.get_item(id);
 
 	view_single_issue(id);
@@ -194,6 +199,7 @@ function view_issue_list(){
     
     var query = $(".search").val().toLowerCase();
     var category = $("#category_filter").val();
+    var show_postponed = $('#show_postponed').prop("checked");
     //var sortby = $("#sortby").val();
 	
     var open_items=itemList.get_all();
@@ -203,18 +209,19 @@ function view_issue_list(){
 		 	return item['title'].toLowerCase().indexOf(query) != -1 || item['notes'].toLowerCase().indexOf(query) != -1 
 		});
     if(category!="*") open_items=open_items.query("category", "==", category);
+    if(!show_postponed) open_items=open_items.query("postpone", "==", "");
+   console.log(category);
     /*var finished_items=itemList.get_all();
     finished_items=finished_items.query("status", "==", "finished"); 
     //finished_items=finished_items.query("prio", "==", undefined);
     finished_items=finished_items.query("title", "contains", query);
     */
-    
+  
     //sortera fltered items
     open_items.sort(
         firstBy("prio")
         .thenBy("postpone") 
         .thenBy("update_date", -1)
-        
 	);
 
    	$("#filtered").empty();    
@@ -248,7 +255,7 @@ function view_single_issue (id) {
     
     // sortera array med items
 	open_items.sort(firstBy("order").thenBy("update_date", -1) );
-	finished_items.sort(firstBy("finish_date"));
+	finished_items.sort(firstBy("finish_date",-1));
 
 	// rensa listor
     $("#open").empty();
