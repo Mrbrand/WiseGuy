@@ -38,16 +38,17 @@
 	
 	<body>
 	
-	
-	
+
+
+
 <!--SINGLE ISSUE PAGE -------------->
 	<div id="single_issue" class="page" style="display:block; min-height:450px;">
 	  
 	<div class="header">
 		<!--div class="menu-title">Root</div-->
 		<input id="quick_search" type="text" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
-		<img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
-        <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+		<!img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
+        <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 	</div> <!--end header-->
 	
 	<!--Sub-meny-->
@@ -74,7 +75,13 @@
 	<div id="issues" class="page">
 			  
 			<div class="header">
-				<div style="float:left;">Filter</div>
+				<div style="float:left;">
+				<select id="category_filter" class="category_select">
+					<option value="*">-All-</option>
+					<option value="undefined">-No category-</option>
+					<option value="edit">Edit...</option>
+				</select>
+				</div>
 				<img class="tree-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
                 <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
@@ -145,6 +152,34 @@
 			
 		</div><!-- end page-->
 		
+			
+			
+			
+			
+<!--CATEGORIES PAGE ----------------------------------------------------------------------->
+	<div id="category_list" class="page" style="display:block; min-height:450px;">
+	  
+	<!--Header -->
+	<div class="header">
+		<input id="quick_search" type="text" style="float:left; width: 250px; font-size:1.1em; color:black; background: transparent; border:none;"/>
+	</div> <!--end header-->
+	
+	<!--Sub-meny-->
+	<div class="controls">
+		<button class="back-button">Back</button>
+        <button class="new-category-button" style="float:right;">New</button>
+	</div><!-- end controls-->
+	
+	<!-- Kategori-lista  -->
+	<div id="categories"></div>
+	
+</div><!-- end page-->
+		
+		
+		
+		
+		
+		
 <!-- NEW item--------------------------------------------------------------------------->
 		<div id="new" class="page">
 			
@@ -163,6 +198,11 @@
 			  <! TITLE>
 				<textarea name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
      		
+     		 <! CATEGORY>
+     			<select name="category" class="category_select autovalue">
+					<option value="-">-None-</option>
+				</select>
+				
      		<! CONTEXT>
         		<span class="field-description">Context</span>  
         		
@@ -223,7 +263,11 @@
 				
 			<! TITLE >
 				<input class="autovalue" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
-
+				
+				
+				<select name="category" class="category_select autovalue">
+					<option value="-">-None-</option>
+				</select>
 		<! CONTEXT>
         		<span class="field-description">Context</span>  
   
@@ -312,37 +356,22 @@
 			
 			<!--Sub-meny-->
 			<div class="controls">
-				<button class="cancel-button">Back</button>
+				<button class="back-button">Back</button>
                  <button onclick="save_preferences();" style="float:right;">Save</button>
 			</div><!-- end controls-->
             
+            <div id="categories2">
+		
+            </div><!-- end categories-->
             
-			<span class="field-description">Predefined filters</span>
-            <input type="text" id="slot1" style="width:50px; text-align:center;" placeholder="Slot 1"/>
-            <input type="text" id="slot2" style="width:50px; text-align:center;" placeholder="Slot 2"/>
-            <input type="text" id="slot3" style="width:50px; text-align:center;" placeholder="Slot 3"/>
-            <input type="text" id="slot4" style="width:50px; text-align:center;" placeholder="Slot 4"/>
-            <input type="text" id="slot5" style="width:50px; text-align:center;" placeholder="Slot 5"/>
-            <input type="text" id="slot6" style="width:50px; text-align:center;" placeholder="Slot 6"/>
-            <input type="text" id="slot7" style="width:50px; text-align:center;" placeholder="Slot 7"/>
-            <input type="text" id="slot8" style="width:50px; text-align:center;" placeholder="Slot 8"/><br/>
+            <button class="new-category-button">New Category</button><br/><br/>
+           	
+           	
             
-            <span class="field-description">Star icon</span>
-            <input type="text" id="star_icon" style="width:70px;" placeholder="Star icon"/><br/>
-
-            <span class="field-description">Background (CSS color)</span>
-            <input type="text" id="background_color" style="width:70px;" placeholder=""/><br/>
-            <span class="field-description">Menu (CSS color)</span>
-            <input type="text" id="controls_color" style="width:70px;" placeholder=""/><br/>
-           
            	<button id="export-button">Export All</button><br/><br/>
            	<button id="export-subtree-button">Export Subtree</button><br/><br/>
            	<textarea id="import" style="width:70px;" /></textarea>
            	<button id="import-button">Import</button>
-           
-            <h3>Statistics</h3>
-            <div id="statistics"></div>
-            
             
             
 		</div><!-- end menu--> 
@@ -387,8 +416,6 @@
 				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->
-		 
-		
 		 
 		<div style="clear:both;"></div>
 		
@@ -516,10 +543,14 @@
     <button onclick="$('.context-filter').val('{{slot8}}'); $('.status-filter').val('open'); view_filter();">{{slot8}}</button>
 </script>	
 
-<script id="path_button_template" type="text/template">
-    <button onclick="$('.path-filter').val('//{{title}}/');  view_filter();">{{icon}}</button>
+<script id="category_input_template" type="text/template">
+	 <span style="width:50px;"/>{{icon}}</span>
+	 <span style="width:150px;"/>{{title}}</span><br>
 </script>
 
+<script id="category_template" type="text/template">
+	 <option class="cat" value="{{id}}">{{icon}} {{title}}</option>
+</script>
 	
     <script language="JavaScript" type="text/javascript" src="array_query.js"></script>
     <script language="JavaScript" type="text/javascript" src="carbon.js"></script>

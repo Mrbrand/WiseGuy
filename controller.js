@@ -3,14 +3,28 @@ var itemList = new Carbon("wiseguy_items");
 var view="issue_list";
 var current={};
 
-// Manuell sortering av item i lista
-//var list = document.getElementById('open');
+ var items = itemList.get_all();
+
+
+items.forEach(function(item) {
+	if(item.category == undefined) item.category = "-";
+});
+
+// Manuell sortering 
 Sortable.create(document.getElementById('open'), {handle: '.subitem-right',onSort: function (evt) {
-    //console.log(evt.oldIndex + ' -> ' + evt.newIndex);
-    reorder(current.id, evt.oldIndex, evt.newIndex);
-    //itemList.set_subitems(current.id);
+    var tasks  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", current.id);
+    reorder(tasks, evt.oldIndex, evt.newIndex);
+    console.log("task");
 }});
 
+Sortable.create(document.getElementById('categories'), {handle: '.subitem-right',onSort: function (evt) {
+    var categories=itemList.get_all().query("type", "==", 13);
+    //var categories  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", current_id);
+    reorder(categories, evt.oldIndex, evt.newIndex);
+    console.log("cat");
+}});
+
+set_categories();
 view_issue_list();
 
 
@@ -19,18 +33,26 @@ view_issue_list();
 $(".add-button").click(function() {
     itemList.add_from_form("#new-item-form");
     if(view == "issue_list") view_issue_list();
+    if(view == "menu") view_menu();
     else view_single_issue(current.id);
 });
 
 
 $(".back-button").click(function() { 
-	view_issue_list();  
+	if(view == "menu") set_categories();
+    view_issue_list();
 });
 
 
 $(".cancel-button").click(function() { 
     if(view == "issue_list") view_issue_list();
+    else if(view == "menu") view_menu();
     else view_single_issue(current.id);
+}); 
+
+$("#category_filter").change(function() { 
+    if($(this).val()=="edit") view_menu();
+    else view_issue_list();
 }); 
  
  
@@ -86,14 +108,17 @@ $(".more-button").click(function() {
 });
  
  
+ 
 $(".new-issue-button").click(function() {
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
 	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
-	
+	$('#new-item-form select[name="category"]').val("-"); 
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
 });
+
+
 
 $(".new-task-button").click(function() { 
 	$('#new-item-form .autovalue').val(""); 
@@ -106,23 +131,37 @@ $(".new-task-button").click(function() {
 });
 
 
-$(".pref-button").click(function() { 
-        $(".page").hide();
-		$("#menu").show();
+
+$(".new-category-button").click(function() { 
+	$('#new-item-form .autovalue').val(""); 
+	$('#new-item-form input[name="type"]').val("13"); 
+	$('#new-item-form input[name="parent_id"]').val(""); 
+    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+	
+	open_page ("#new");
+	$("#new-item-form [name='title'] ").focus();
 });
+
+
+$(".pref-button").click(function() { 
+	view_menu() ; 
+});
+
 
 
 $(".save-button").click(function() {
     console.log(view);
     itemList.edit_from_form("#edit-item-form");
+   
     if(view == "issue_list") view_issue_list();
+    else if(view == "menu") view_menu();
     else view_single_issue(current.id);
+   
 });
 
 
-// GOTO EDIT .subitem-left 
+// GOTO EDIT  
 $(document).on('click', ".subitem-left", function() {
-	
 	id = $(this).parent().find(".item_id").text();
 	edit_item = itemList.get_item(id);
 
@@ -135,20 +174,12 @@ $(document).on('click', ".subitem-left", function() {
     }
     
     open_page ("#edit", [".more-button"])
-    
-    
-    /*$(".page").hide();
-    $("#edit").show();
-	
-	$('.more').hide();
-	$('.more-button').show();
-    
-    window.scrollTo(0, 0);*/
 });
+
+
 
 // GOTO SINGLE ISSUE
 $(document).on('click', ".issue .subitem-center", function() {
-	
 	id = $(this).parent().find(".item_id").text();
 	edit_item = itemList.get_item(id);
 
@@ -160,20 +191,23 @@ $(document).on('click', ".issue .subitem-center", function() {
 
 function view_issue_list(){
   	view = "issue_list";
+    
     var query = $(".search").val().toLowerCase();
+    var category = $("#category_filter").val();
     //var sortby = $("#sortby").val();
-    open_items=itemList.get_all();
+	
+    var open_items=itemList.get_all();
     open_items=open_items.query("type", "==", 7);
 	open_items=open_items.query("finish_date", "==", "");
     open_items=open_items.filter(function (item){
 		 	return item['title'].toLowerCase().indexOf(query) != -1 || item['notes'].toLowerCase().indexOf(query) != -1 
 		});
-    
-    
-    finished_items=itemList.get_all();
+    if(category!="*") open_items=open_items.query("category", "==", category);
+    /*var finished_items=itemList.get_all();
     finished_items=finished_items.query("status", "==", "finished"); 
     //finished_items=finished_items.query("prio", "==", undefined);
     finished_items=finished_items.query("title", "contains", query);
+    */
     
     //sortera fltered items
     open_items.sort(
@@ -183,19 +217,16 @@ function view_issue_list(){
         
 	);
 
-  	//mustache output
    	$("#filtered").empty();    
-  	
   	open_items.forEach(function(item) {
 		item_meta = item_with_meta(item.id);
-		
 		var template = $('#issue_template').html();
 		var html = Mustache.to_html(template, item_meta);
 		$("#filtered").append(html);
 	});
 
   	//om inga items hittas
-	if (open_items.length == 0 && finished_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
+	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
     
     $(".page").hide();
 	$("#issues").show();
@@ -244,6 +275,27 @@ function view_single_issue (id) {
 	$("#single_issue").show();
 }
 
+
+
+function view_menu() {
+	view = "menu";
+    var categories=itemList.get_all().query("type", "==", 13);
+	categories.sort(firstBy("order").thenBy("update_date", -1) );
+    
+    $("#categories").empty();
+    categories.forEach(function(item) {
+		item_meta = item_with_meta(item.id);
+		var template = $('#open_task_template').html();
+		var html = Mustache.to_html(template, item_meta);
+		$("#categories").append(html);
+	});
+   
+    $(".page").hide();
+	$("#category_list").show();
+}
+
+
+
 function open_page (page_id, show_extra) {
 	
 	$(".extra").hide();
@@ -258,14 +310,16 @@ function open_page (page_id, show_extra) {
 	window.scrollTo(0, 0);
 }
 
-function reorder(item_id, from_pos, to_pos){
-    var tasks  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", item_id);
-    tasks.sort(firstBy("order").thenBy("update_date", -1) );
+
+
+function reorder(items, from_pos, to_pos){
+    //var tasks  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", item_id);
+    items.sort(firstBy("order").thenBy("update_date", -1) );
     
     var offset = 0;
     
-    for (var index = 0, len = tasks.length; index < len; index++) {
-        task = tasks[index];
+    for (var index = 0, len = items.length; index < len; index++) {
+        item = items[index];
         
         if (from_pos >= to_pos){
             if(index == (to_pos)) offset++;
@@ -275,11 +329,26 @@ function reorder(item_id, from_pos, to_pos){
         }
         
         if(index == from_pos) offset--;
-        task.order = index + offset;
-        if(index == from_pos) task.order = to_pos;
+        item.order = index + offset;
+        if(index == from_pos) item.order = to_pos;
     }
-    console.log(tasks);
+    console.log(items);
     itemList.save(); 
+}
+
+function set_categories(){
+ //mustache output  
+   	var categories=itemList.get_all().query("type", "==", 13);
+   	categories.sort(firstBy("order").thenBy("update_date", -1) );
+   	
+   	$(".cat").remove();
+    categories.forEach(function(item) {
+		item_meta = item_with_meta(item.id);
+		var template = $('#category_template').html();
+		var html = Mustache.to_html(template, item_meta);
+		$(".category_select").append(html);
+	});    
+	$(".category_select").val("*");
 }
 
 function item_with_meta(id){
@@ -290,7 +359,6 @@ function item_with_meta(id){
     // sortera array med items
 	open_tasks.sort(firstBy("order").thenBy("update_date", -1) );
 	finished_tasks.sort(firstBy("finish_date"));
-	console.log(open_tasks);
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
 	item.finished_task_count = finished_tasks.length;
