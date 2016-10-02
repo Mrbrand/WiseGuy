@@ -8,6 +8,7 @@ var current={};
 
 items.forEach(function(item) {
 	if(item.category == undefined) item.category = "-";
+	 if(moment(item.postpone, 'YYYY-MM-DD') < moment()) item.postpone =""; 
 });
 
 // Manuell sortering 
@@ -107,6 +108,7 @@ $(".more-button").click(function() {
  
  
 $(".new-issue-button").click(function() {
+	$("#new .menu-title").html("New Issue");
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
 	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
@@ -120,6 +122,7 @@ $(".new-issue-button").click(function() {
 
 
 $(".new-task-button").click(function() { 
+	$("#new .menu-title").html("New Task for: "+edit_item.title);
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val(current.id); 
@@ -162,12 +165,31 @@ $("#show_postponed").change(function() {
     view_issue_list();
 }); 
 
+
+// swipe back
+$("#single_issue").on('swiperight',  function(){ 
+	view_issue_list();
+});
+
+
+$(".task-list-button").click(function() { 
+	open_page("#task_list");
+	view_task_list(); 
+});
+
+
+$(".issue-list-button").click(function() { 
+	view_issue_list(); 
+});
+
+
+
 // GOTO EDIT  
 $(document).on('click', ".subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
 	edit_item = itemList.get_item(id);
 
-	$(".menu-title").html("Edit: "+edit_item.title);
+	$("#edit .menu-title").html("Edit: "+edit_item.title);
     
     $('#edit-item-form input:radio[value="'+edit_item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
 	
@@ -185,7 +207,7 @@ $(document).on('click', ".issue .subitem-center", function() {
 	id = $(this).parent().find(".item_id").text();
 	issue = itemList.get_item(id);
 
-	$("#single_issue .menu-title").text(issue.title)
+	$("#single_issue .menu-title").text(issue.title);
 	edit_item = itemList.get_item(id);
 
 	view_single_issue(id);
@@ -239,6 +261,49 @@ function view_issue_list(){
 	$("#issues").show();
 }
 
+
+function view_task_list(){
+  	view = "task_list";
+    
+    var query = $(".search").val().toLowerCase();
+    var category = $("#category_filter").val();
+    var show_postponed = $('#show_postponed').prop("checked");
+    //var sortby = $("#sortby").val();
+	
+    var open_items=itemList.get_all();
+    open_items=open_items.query("type", "==", 6);
+	open_items=open_items.query("finish_date", "==", "");
+    open_items=open_items.filter(function (item){
+		 	return item['title'].toLowerCase().indexOf(query) != -1 || item['notes'].toLowerCase().indexOf(query) != -1 
+		});
+    if(category!="*") open_items=open_items.query("category", "==", category);
+    if(!show_postponed) open_items=open_items.query("postpone", "==", "");
+   //console.log(category);
+    /*var finished_items=itemList.get_all();
+    finished_items=finished_items.query("status", "==", "finished"); 
+    //finished_items=finished_items.query("prio", "==", undefined);
+    finished_items=finished_items.query("title", "contains", query);
+    */
+  
+    //sortera fltered items
+    open_items.sort(
+        firstBy("prio")
+        .thenBy("postpone") 
+        .thenBy("update_date", -1)
+	);
+
+   	$("#tasks").empty();    
+  	open_items.forEach(function(item) {
+		item_meta = item_with_meta(item.id);
+		var template = $('#issue_template').html();
+		var html = Mustache.to_html(template, item_meta);
+		$("#tasks").append(html);
+	});
+
+  	//om inga items hittas
+	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
+   
+}
 
 
 

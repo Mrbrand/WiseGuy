@@ -46,15 +46,15 @@
 			<div class="header">
 				
 				<div style="float:left;">
-				<select id="category_filter" class="category_select">
+				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt;">
 					<option value="*">-All-</option>
 					<option value="-">-No category-</option>
 					<option value="edit">Edit...</option>
 				</select>
 				</div>
 			
-				<img class="tree-button" src="img/tree-icon.png"  style="float:right; margin:5px; cursor:pointer;"/>
-                <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+				<img class="task-list-button" src="img/type6.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
+                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
@@ -119,8 +119,89 @@
 				<div id="filtered"></div>
 			</div><!-- end items--> 
 			
-		</div><!-- end page-->
+</div><!-- end page-->
 		
+		
+<!--TASK LIST -------------->
+	<div id="task_list" class="page">
+			  
+			<div class="header">
+				
+				<div style="float:left;">
+				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt;">
+					<option value="*">-All-</option>
+					<option value="-">-No category-</option>
+					<option value="edit">Edit...</option>
+				</select>
+				</div>
+			
+				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
+                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+			</div> <!--end header-->
+			
+		<! Controls>
+			<div class="controls" style="height:40px; padding: 5px;">
+                
+                <input class="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
+                	
+					<input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
+					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
+				
+                <button class="new-issue-button" style="float:right;">New</button>
+            </div><!-- end controls-->
+            
+        <! Controls categories>
+            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
+                <div id="prefefined" style="float:left;"></div>
+                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
+            </div><!-- end controls categories-->
+       
+        <! Controls context>
+            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
+            	
+            </div><!-- end controls context-->
+            
+        <!Title-filter>
+            <div id="controls-title" class="controls-extra" style="display:none;">
+               
+               
+                <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('7'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type7.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('5'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type5.png" height="16"/></button>
+                <button onclick=" $('.type-filter').val('15'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type15.png" height="16"/></button>
+                <input class="type-filter" placeholder="Type" style="width:50px; margin-left:5px;"/>
+                
+                 <select style="float:right;margin-left:5px;width:40px;" class="prio-filter" onchange="view_filter();">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                </select>
+                
+                 <button class="status-button" onclick="togggleStatus();" style="float:right;margin-left:5px;">Status</button>
+                 <input class="path-filter" type="text" onkeyup="view_filter();" placeholder="Path string" value="" style="width:70px; margin-right:5px;"/>
+                 <input class="context-filter" type="text" onkeyup="view_filter();" placeholder="Context icon" value="" style="width:70px; margin-right:5px;"/>
+                
+            </div><!-- end controls-->
+            
+            
+            <!Status-filter>
+            <div id="controls-status" style="display:none;" >
+                <select class="status-filter" onchange="view_filter();">
+    				<option value="open">Status: Open</option>
+					<option value="finished">Status: Finished</option>
+				</select>
+            </div><!-- end controls-->
+			
+			<!-- ItemLista -->
+			<div id="items">
+				<div id="tasks"></div>
+			</div><!-- end items--> 
+			
+</div><!-- end page-->
 
 
 
@@ -129,7 +210,7 @@
 	<div id="single_issue" class="page" style="display:block; min-height:450px;">
 	  
 	<div class="header">
-		<div class="menu-title">Root</div>
+		<div class="menu-title">...</div>
 		<!img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
         <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 	</div> <!--end header-->
@@ -152,6 +233,9 @@
 	</div><!-- end items--> 
 	
 </div><!-- end page-->
+
+
+
 
 			
 			
@@ -400,7 +484,7 @@
 		</div>
          
          <div class="subitem-right" style="width:50px; float: right;  height:40px; padding:15px 10px 10px 10px; text-align:right;">
-    		<span style="font-size:16pt; color: gray;">{{open_task_count}}<span style="font-size:12pt; color: gray;">/{{finished_task_count}}</span></span>
+    		<span style="font-size:16pt; color: gray;">{{open_task_count}}<span style="font-size:12pt; color: lightgray;">/{{finished_task_count}}</span></span>
 		</div>
 		
 		<div class="subitem-center">
