@@ -31,7 +31,7 @@ view_issue_list();
 $(".add-button").click(function() {
     itemList.add_from_form("#new-item-form");
     if(view == "issue_list") view_issue_list();
-    if(view == "menu") view_menu();
+    else if(view == "menu") view_menu();
     else view_single_issue(current.id);
 });
 
