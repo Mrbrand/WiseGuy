@@ -38,7 +38,7 @@ function open_page (page_id, show_extra) {
 	if(page_id == "#category_list") view_menu();
 	else if(page_id == "#issues") view_issue_list();
 	else if(page_id == "#single_issue") view_single_issue(current_item.id);
-	else if(page_id == "#tasks") view_task_list();
+	else if(page_id == "#task_list") view_task_list();
 	
 	console.log(page_id);
 	
@@ -111,7 +111,7 @@ function view_task_list(){
     open_items.sort(
         firstBy("prio")
         .thenBy("postpone") 
-        .thenBy("update_date", -1)
+        .thenBy("icon")
 	);
 
 	mustache_output("#tasks", open_items, "#issue_template");

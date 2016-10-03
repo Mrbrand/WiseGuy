@@ -137,7 +137,7 @@ $("#single_issue").on('swiperight',  function(){
 
 
 $(".task-list-button").click(function() { 
-	open_page("#taskss");
+	open_page("#task_list");
 });
 
 
