@@ -1,7 +1,7 @@
 /* INIT *******************************************************************/
 var itemList = new Carbon("wiseguy_items");
 
-var current_page = "#issue_list";
+var current_page = "#issues";
 var previous_page = "";
 var current_item={};
 
@@ -95,6 +95,7 @@ function view_task_list(){
     var query = $(".search").val().toLowerCase();
     var category = $("#category_filter").val();
     var show_postponed = $('#show_postponed').prop("checked");
+    var context = $('input[name="icon"]:checked').val();
     //var sortby = $("#sortby").val();
 	
     var open_items=itemList.get_all()
@@ -106,6 +107,7 @@ function view_task_list(){
     
     if(category!="*") open_items=open_items.query("category", "==", category);
     if(!show_postponed) open_items=open_items.query("postpone", "==", "");
+     if(context) open_items=open_items.query("icon", "==", context);
   
     //sortera fltered items
     open_items.sort(

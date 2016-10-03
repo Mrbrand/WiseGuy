@@ -65,7 +65,7 @@
 					<input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
 					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
 				
-                <button class="new-issue-button" style="float:right;">New</button>
+                <button class="new-issue-button" style="float:right;">New issue</button>
             </div><!-- end controls-->
             
         <! Controls categories>
@@ -147,13 +147,18 @@
 					<input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
 					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
 				
-                <button class="new-issue-button" style="float:right;">New</button>
+                <button class="new-task-button" style="float:right;">New task</button>
             </div><!-- end controls-->
             
-        <! Controls categories>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
-                <div id="prefefined" style="float:left;"></div>
-                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
+        <! Controls context>
+            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; ">
+                <div style="margin: 10px 0;">
+		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
+					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
+					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
+					<label><input type="radio" name="icon" value="" /><span>none</span></label>
+        		</div>
             </div><!-- end controls categories-->
        
         <! Controls context>
@@ -219,7 +224,7 @@
 	<div class="controls">
 		<!--button class="home-button"><img src="img/home16.png"</button-->
 		<button class="back-button" style="float:left;">Back</button>
-        <button class="new-task-button" style="float:right;">New</button>
+        <button class="new-task-button" style="float:right;">New task</button>
         
         <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
         <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
@@ -250,7 +255,7 @@
 	<!--Sub-meny-->
 	<div class="controls">
 		<button class="back-button">Back</button>
-        <button class="new-category-button" style="float:right;">New</button>
+        <button class="new-category-button" style="float:right;">New category</button>
 	</div><!-- end controls-->
 	
 	<!-- Kategori-lista  -->
@@ -289,9 +294,16 @@
      		<! CONTEXT>
         		<span class="field-description">Context</span>  
         		
-        		<div style="display:inline;">
+        		<!--div style="display:inline;">
         			<input name="icon" class="autovalue" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
-           		</div>
+           		</div-->
+           		
+           		<div style="margin: 10px 0;">
+		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
+					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
+					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
+        		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
 		            <!...>
@@ -354,9 +366,15 @@
 		<! CONTEXT>
         		<span class="field-description">Context</span>  
   
-        		<div style="display:inline;">
+  				<div style="margin: 10px 0;">
+		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
+					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
+					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
+        		</div>
+        		<!--div style="display:inline;">
         			<input class="autovalue" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
-           		</div>
+           		</div-->
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
 		            <!...>

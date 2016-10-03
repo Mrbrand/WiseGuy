@@ -88,11 +88,12 @@ $(".new-issue-button").click(function() {
 
 
 $(".new-task-button").click(function() { 
-	$("#new .menu-title").html("New Task for: "+edit_item.title);
+	$("#new .menu-title").html("New Task for: "+current_item.title);
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val(current_item.id); 
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+    $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val(current_item.category); 
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
@@ -115,6 +116,9 @@ $(".pref-button").click(function() {
 	open_page("#menu");
 });
 
+$("#task_list input[name='icon']").click(function() { 
+	open_page("#task_list");
+});
 
 
 $(".save-button").click(function() {
@@ -150,14 +154,17 @@ $(".issue-list-button").click(function() {
 // GOTO EDIT  
 $(document).on('click', ".subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
-	edit_item = itemList.get_item(id);
+	item = itemList.get_item(id);
 
-	$("#edit .menu-title").html("Edit: "+edit_item.title);
+	$("#edit .menu-title").html("Edit: "+item.title);
     
-    $('#edit-item-form input:radio[value="'+edit_item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
+    $('#edit-item-form input:radio').prop('checked', false); 
+    $('#edit-item-form input:radio[value="'+item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
+    $('#edit-item-form input:radio[value="'+item.icon+'"]').prop('checked', true); // prio (css trick med bilder)
 	
-    for (var key in edit_item) {
-        $('#edit-item-form .autovalue[name="'+key+'"]').val(edit_item[key]);
+	
+    for (var key in item) {
+        $('#edit-item-form .autovalue[name="'+key+'"]').val(item[key]);
     }
     
     open_page ("#edit", [".more-button"])

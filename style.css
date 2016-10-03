@@ -23,6 +23,17 @@ label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
     border-radius: 5px;
 }
 
+label > input + span{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+  padding:3px;
+}
+label > input:checked + span{ /* (CHECKED) IMAGE STYLES */
+    border: 2px solid #B0DC59;
+    border-radius: 5px;
+    padding:3px;
+}
+
 /*.input-hidden {
   position: absolute;
   left: -9999px;
