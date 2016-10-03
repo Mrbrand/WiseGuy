@@ -116,7 +116,7 @@ function view_task_list(){
         .thenBy("icon")
 	);
 
-	mustache_output("#tasks", open_items, "#issue_template");
+	mustache_output("#tasks", open_items, "#filtered_task_template");
 
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
@@ -236,6 +236,7 @@ function item_with_meta(id){
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
 	item.finished_task_count = finished_tasks.length;
+	if(item.type==6) item.parent_title = itemList.get_item(item.parent_id).title
 	
 	return item;
 }

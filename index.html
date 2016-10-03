@@ -157,7 +157,7 @@
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
 					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
-					<label><input type="radio" name="icon" value="🚗" /><span>🚗</span></label>
+					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
 					<label><input type="radio" name="icon" value="" /><span>none</span></label>
         		</div>
@@ -305,7 +305,7 @@
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
 					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
-					<label><input type="radio" name="icon" value="🚗" /><span>🚗</span></label>
+					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
 					<label><input type="radio" name="icon" value="" /><span>none</span></label>
         		</div>
@@ -376,7 +376,7 @@
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
 					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
-					<label><input type="radio" name="icon" value="🚗" /><span>🚗</span></label>
+					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
 					<label><input type="radio" name="icon" value="" /><span>none</span></label>
         		</div>
@@ -603,32 +603,24 @@
 </script>	
 	
 	
-<!-- Mustache template search -->
-<script id="filtered_items_template" type="text/template">
-	<div class="subitem project{{#finish_date}} finished{{/finish_date}}{{#postpone}} postponed{{/postpone}}">
+<!-- Mustache template task-->
+<script id="filtered_task_template" type="text/template">
+	<div class="item task {{#postpone}} postponed{{/postpone}}">
 						
 		<div class="subitem-left quick_edit_item">
-			<img class="prio-icon" src="img/prio{{prio}}.png"/>
-			{{#icon}}<div style="font-size: 18px; margin:4px 7px; ">{{icon}}</div>{{/icon}}
-			{{^icon}}<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>{{/icon}}
-			<!img class="type-icon" style="margin:0;" src="img/size{{size}}.png"/>
+			
+    		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
+            <img class="prio-icon" src="img/prio{{prio}}.png"/>
+            <!--span style="color:#888;">{{order}}</span-->
 		</div>
 		
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
-			{{#path}}<div class="path" style="">{{path}}</div>{{/path}}
+			<div class="path" style="">{{parent_title}}</div>
 			<div class="next_action_div" style="float:left;">
-				{{#finish_date}}<span class="finish_date">{{finish_date}}</span><br/>{{/finish_date}}
-                {{#postpone}}<span class="postpone">{{postpone}}</span><br/>{{/postpone}}
+				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
-				{{#subitems}}
-                    {{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
-					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
-					<span class="next_action">{{title}}</span> 
-					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
-                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
-                    <br/>
-				{{/subitems}}
 			</div>
 		</div><!-- end subitem-center -->
 		 
