@@ -236,7 +236,7 @@ function item_with_meta(id){
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
 	item.finished_task_count = finished_tasks.length;
-	if(item.parent_id!=undefined) item.parent_title = itemList.get_item(item.parent_id).title
+	if(item.type==6 & item.parent_id!=undefined) item.parent_title = itemList.get_item(item.parent_id).title
 	else item.parent_title = "";
 	
 	return item;
