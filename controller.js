@@ -152,7 +152,7 @@ $(".issue-list-button").click(function() {
 
 
 // GOTO EDIT  
-$(document).on('click', ".subitem-left", function() {
+$(document).on('click', "#issues .subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
 
@@ -171,11 +171,22 @@ $(document).on('click', ".subitem-left", function() {
 });
 
 
-
 // GOTO SINGLE ISSUE
 $(document).on('click', ".issue .subitem-center", function() {
 	id = $(this).parent().find(".item_id").text();
 	current_item = itemList.get_item(id);
+
+	$("#single_issue .menu-title").text(current_item.title);
+	
+	open_page("#single_issue");
+	//view_single_issue(id);
+});
+
+
+// GOTO SINGLE ISSUE
+$(document).on('click', "#task_list .subitem-center", function() {
+	id = $(this).parent().find(".item_id").text();
+	current_item = itemList.get_item(itemList.get_item(id).parent_id);
 
 	$("#single_issue .menu-title").text(current_item.title);
 	

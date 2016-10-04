@@ -54,7 +54,7 @@
 				</div>
 			
 				<img class="task-list-button" src="img/type6.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+                <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
@@ -127,32 +127,8 @@
 			  
 			<div class="header">
 				
-				<div style="float:left;">
-				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt;">
-					<option value="*">-All-</option>
-					<option value="-">-No category-</option>
-					<option value="edit">Edit...</option>
-				</select>
-				</div>
-			
-				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
-			</div> <!--end header-->
-			
-		<! Controls>
-			<div class="controls" style="height:40px; padding: 5px;">
-                
-                <input class="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
-                	
-					<input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
-					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
 				
-                <button class="new-task-button" style="float:right;">New task</button>
-            </div><!-- end controls-->
-            
-        <! Controls context>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; ">
-                <div style="margin: 10px 0;">
+				<div style="margin: 10px 0; float:left;">
 		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
@@ -161,6 +137,23 @@
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
 					<label><input type="radio" name="icon" value="" /><span>none</span></label>
         		</div>
+			
+			
+				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
+                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+			</div> <!--end header-->
+			
+		<! Controls>
+			<div class="controls" style="height:40px; padding: 5px;">
+                
+                <input class="search_task" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
+                
+                <button class="new-task-button" style="float:right;">New task</button>
+            </div><!-- end controls-->
+            
+        <! Controls context>
+            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
+                
             </div><!-- end controls categories-->
        
         <! Controls context>
@@ -471,11 +464,9 @@
                  <button onclick="save_preferences();" style="float:right;">Save</button>
 			</div><!-- end controls-->
             
-            <div id="categories2">
-		
-            </div><!-- end categories-->
-            
-            <button class="new-category-button">New Category</button><br/><br/>
+            <input id="debug" type="checkbox" style="width:25px; float:left; margin-left:5px;">
+					<span style="color:gray; margin-left:3px; font-size:9pt;">activate debug timer</span>
+					<br/><br/>
            	
            	
             
@@ -656,10 +647,9 @@
 </script>
 	
     <script language="JavaScript" type="text/javascript" src="array_query.js"></script>
+    <script language="JavaScript" type="text/javascript" src="javascript/debug_timer.js"></script>
     <script language="JavaScript" type="text/javascript" src="carbon.js"></script>
     <script language="JavaScript" type="text/javascript" src="interface.js"></script>
 	<script language="JavaScript" type="text/javascript" src="controller.js"></script>
-    <script language="javascript">
 
-</script>
     

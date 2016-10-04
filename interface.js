@@ -4,6 +4,7 @@ var itemList = new Carbon("wiseguy_items");
 var current_page = "#issues";
 var previous_page = "";
 var current_item={};
+var debug = new Timer();
 
 var items = itemList.get_all();
 
@@ -63,6 +64,8 @@ function view_issue_list(){
     var category = $("#category_filter").val();
     var show_postponed = $('#show_postponed').prop("checked");
     
+   	if($('#debug').prop("checked")) debug.begin("Issues")
+    
     var open_items=itemList.get_all()
    		.query("type", "==", 7)
 		.query("finish_date", "==", "")
@@ -71,30 +74,40 @@ function view_issue_list(){
 		 				item['notes'].toLowerCase().indexOf(query) != -1 
 		});
     
+	
+    
     if(category!="*") open_items=open_items.query("category", "==", category);
     if(!show_postponed) open_items=open_items.query("postpone", "==", "");
+    
+    if($('#debug').prop("checked")) debug.comment("filter klar");
     
     open_items.sort(
         firstBy("prio")
         .thenBy("postpone") 
         .thenBy("update_date", -1));
-
+	
+	if($('#debug').prop("checked")) debug.comment("sortering klar");
+	
 	mustache_output("#filtered", open_items, "#issue_template");
-
+	
+	if($('#debug').prop("checked")) debug.comment("output klar");
+	
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
     
     $(".page").hide();
 	$("#issues").show();
 	view = "issue_list";
+
+	if($('#debug').prop("checked")) debug.stop();
+
 }
 
 
 
+
 function view_task_list(){ 	
-    var query = $(".search").val().toLowerCase();
-    var category = $("#category_filter").val();
-    var show_postponed = $('#show_postponed').prop("checked");
+    var query = $(".search_task").val().toLowerCase();
     var context = $('input[name="icon"]:checked').val();
     //var sortby = $("#sortby").val();
 	
@@ -105,8 +118,6 @@ function view_task_list(){
 		 	return item['title'].toLowerCase().indexOf(query) != -1 || item['notes'].toLowerCase().indexOf(query) != -1 
 		});
     
-    if(category!="*") open_items=open_items.query("category", "==", category);
-    if(!show_postponed) open_items=open_items.query("postpone", "==", "");
      if(context) open_items=open_items.query("icon", "==", context);
   
     //sortera fltered items
