@@ -77,6 +77,7 @@ $(".new-issue-button").click(function() {
 	$("#new .menu-title").html("New Issue");
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
+	$('#edit-item-form input:radio').prop('checked', false); 
 	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
@@ -92,6 +93,7 @@ $(".new-task-button").click(function() {
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val(current_item.id); 
+    $('#edit-item-form input:radio').prop('checked', false); 
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val(current_item.category); 
@@ -152,7 +154,7 @@ $(".issue-list-button").click(function() {
 
 
 // GOTO EDIT  
-$(document).on('click', "#issues .subitem-left", function() {
+$(document).on('click', ".subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
 
