@@ -87,8 +87,7 @@ $(".new-issue-button").click(function() {
 });
 
 
-
-$(".new-task-button").click(function() { 
+$("#single_issue .new-task-button").click(function() { 
 	$("#new .menu-title").html("New Task for: "+current_item.title);
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
@@ -97,6 +96,21 @@ $(".new-task-button").click(function() {
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val(current_item.category); 
+	
+	open_page ("#new");
+	$("#new-item-form [name='title'] ").focus();
+});
+
+$("#task_list .new-task-button").click(function() { 
+	$("#new .menu-title").html("New Task: no issue");
+	$('#new-item-form .autovalue').val(""); 
+	$('#new-item-form input[name="type"]').val("6"); 
+	$('#new-item-form input[name="parent_id"]').val("-"); 
+    $('#edit-item-form input:radio').prop('checked', false); 
+    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+    $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
+	$('#new-item-form select[name="category"]').val("-"); 
+	
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
 });
@@ -169,7 +183,11 @@ $(document).on('click', ".subitem-left", function() {
         $('#edit-item-form .autovalue[name="'+key+'"]').val(item[key]);
     }
     
-    open_page ("#edit", [".more-button"])
+    $("#edit-item-form input").hide();
+    
+    
+    
+    open_page ("#edit");
 });
 
 

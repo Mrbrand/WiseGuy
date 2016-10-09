@@ -43,13 +43,6 @@ function open_page (page_id, show_extra) {
 	
 	console.log(page_id);
 	
-	
-	$(".extra").hide();
-	
-	if (show_extra) show_extra.forEach(function(element) {
-		$(element).show();
-	});
-		
 	$(".page").hide();
 	$(page_id).show();
 	
@@ -69,13 +62,8 @@ function view_issue_list(){
     var open_items=itemList.get_all()
    		.query("type", "==", 7)
 		.query("finish_date", "==", "")
-    	.filter(function (item){
-		 	return item['title'].toLowerCase().indexOf(query) != -1 || 
-		 				item['notes'].toLowerCase().indexOf(query) != -1 
-		});
-    
-	
-    
+    	.query("title, notes", "contains", query);
+      
     if(category!="*") open_items=open_items.query("category", "==", category);
     if(!show_postponed) open_items=open_items.query("postpone", "==", "");
     
@@ -114,17 +102,15 @@ function view_task_list(){
     var open_items=itemList.get_all()
     	.query("type", "==", 6)
 		.query("finish_date", "==", "")
-		.filter(function (item){
-		 	return item['title'].toLowerCase().indexOf(query) != -1 || item['notes'].toLowerCase().indexOf(query) != -1 
-		});
-    
+		.query("title, notes", "contains", query);
+
      if(context) open_items=open_items.query("icon", "==", context);
   
     //sortera fltered items
     open_items.sort(
         firstBy("prio")
         .thenBy("postpone") 
-        .thenBy("icon")
+        .thenBy("update_date", -1)
 	);
 
 	mustache_output("#tasks", open_items, "#filtered_task_template");
