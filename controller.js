@@ -74,6 +74,8 @@ $(".more-button").click(function() {
  
  
 $(".new-issue-button").click(function() {
+	$("#new-item-form").children().show();
+	
 	$("#new .menu-title").html("New Issue");
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
@@ -82,12 +84,14 @@ $(".new-issue-button").click(function() {
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
 	
+	$("#new-item-form .context").hide();
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
 });
 
 
 $("#single_issue .new-task-button").click(function() { 
+	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task for: "+current_item.title);
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
@@ -97,11 +101,13 @@ $("#single_issue .new-task-button").click(function() {
     $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val(current_item.category); 
 	
+	$("#new-item-form .category_select").hide();
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
 });
 
 $("#task_list .new-task-button").click(function() { 
+	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: no issue");
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
@@ -118,10 +124,13 @@ $("#task_list .new-task-button").click(function() {
 
 
 $(".new-category-button").click(function() { 
+	$("#new-item-form").children().show();
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("13"); 
 	$('#new-item-form input[name="parent_id"]').val(""); 
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+	
+	
 	
 	open_page ("#new");
 	$("#new-item-form [name='title'] ").focus();
@@ -182,11 +191,7 @@ $(document).on('click', ".subitem-left", function() {
     for (var key in item) {
         $('#edit-item-form .autovalue[name="'+key+'"]').val(item[key]);
     }
-    
-    $("#edit-item-form input").hide();
-    
-    
-    
+      
     open_page ("#edit");
 });
 
