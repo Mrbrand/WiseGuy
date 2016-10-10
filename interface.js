@@ -53,6 +53,8 @@ function open_page (page_id, show_extra) {
 	
 	if(page_id == "#task_list" || page_id == "#issues" )  $("body").scrollTop(scroll_positions[page_id]);
 	else window.scrollTo(0, 0);
+	
+	$(current_page + " [name='title'] ").focus();
 }
 
 
@@ -165,7 +167,7 @@ function view_menu() {
     	.query("type", "==", 13)
 		.sort(firstBy("order").thenBy("update_date", -1) );
     
-    mustache_output("#categories", categories, "#open_task_template");
+    mustache_output("#categories", categories, "#category_template");
 	
     $(".page").hide();
 	$("#category_list").show();
@@ -204,11 +206,11 @@ function reorder(items, from_pos, to_pos){
 function set_categories(){
    	var categories=itemList.get_all().query("type", "==", 13);
    	categories.sort(firstBy("order").thenBy("update_date", -1) );
-   	
+   	console.log("hej");
    	$(".cat").remove();
     categories.forEach(function(item) {
 		item_meta = item_with_meta(item.id);
-		var template = $('#category_template').html();
+		var template = $('#category_select_template').html();
 		var html = Mustache.to_html(template, item_meta);
 		$(".category_select").append(html);
 	});    

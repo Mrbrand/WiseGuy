@@ -452,7 +452,99 @@
 		</div><!--edit-item--> 
 
 
+			
+<!-- NEW CATEGORY--------------------------------------------------------------------------->
+		<div id="new-category" class="page" style="display:none;">
+			
+			<div class="header">
+				<div class="menu-title">-new category-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="controls">
+				<button class="cancel-button">Cancel</button>
+				<button class="add-button">Add category</button>
+			</div><!-- end controls--> 
 		
+			<form id="new-category-form">
+			  
+			  <! TITLE>
+				<textarea name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
+     	
+			 <! ICON>
+     		<input name="icon" class="autovalue"  placeholder ="icon" style="margin: 10px 0;  width:100%; height:80px; font-size:60px;text-align: center; background: transparent; border: none; > "/>
+        	
+             <! NOTES>       
+				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
+				
+			 <! hidden >
+                <input name="order" value="0"  type="hidden" />
+                <input name="type"  class="autovalue" type="hidden" />
+				<input name="parent_id" class="autovalue" type="hidden" />
+				<input name="finish_date"  value="" type="hidden" />
+				
+			</form>
+			<br/><br/><br/><br/><br/><br/><br/>
+		</div><!-- end new-item--> 
+				
+		
+<!-- EDIT CATEGORY ---------------------------------------------------------------------->
+		<div id="edit-category" class="page" style="display:none;">
+			
+			<div class="header">
+				<div class="menu-title">-item-title-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="controls">
+				<button class="cancel-button">Cancel</button>
+				<button class="save-button" style="width:70px; float:right;margin-left:5px;"><img src="img/save.png" /></button>
+				<button class="delete-button" style="width:70px; float:right;margin-left:5px;"><img src="img/delete2.png" /></button>
+				<button class="finish-button" style="width:70px; float:right;margin-left:5px;"><img src="img/finish.gif" /></button>
+				<br/><br/>
+			</div><!-- end controls--> 
+			
+			
+			<form id="edit-category-form">
+				
+			<! TITLE >
+				<input class="autovalue" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
+        	
+        	<! ICON>
+     		<input name="icon" class="autovalue"  placeholder ="icon" style="margin: 10px 0;  width:100%; height:80px; font-size:60px;text-align: center; background: transparent; border: none; > "/>
+        								
+			<! NOTES >
+				<textarea class="autovalue" name="notes" rows="8" placeholder="Notes"></textarea>
+
+				
+				<div class="more" style="display:none;">
+                    
+                    <!HIDDEN>
+                    <div style="display:none;" >
+						<input class="item-id autovalue" name="id" type="text" /> <br/>
+						<input class="autovalue" name="parent_id" type="text"/><br/>	
+						<input class="autovalue" name="type" type="text" /> <br/>
+						<input class="autovalue" type="text" name="order" />
+                    </div>	
+               	
+     			<! CREATED >                                                   
+                    <span class="field-description">Item created</span>
+					<input class="autovalue" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
+                    
+                 <! UPDATED >
+                    <span class="field-description">Last updated</span>
+    				<input class="autovalue" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+					
+					<! FINISHED >
+                    <span class="field-description">Finish date</span>
+					<input class="autovalue" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+					
+				</div>
+				
+			</form>
+		</div><!--edit-item--> 
+
+	
 
 <!MENU >
 		<div id="menu" class="page" style="display:none;">
@@ -629,6 +721,34 @@
 </script>	
 
 
+<!-- Mustache template öppna tasks-->
+<script id="category_template" type="text/template">
+	<div class="item category {{#postpone}} postponed{{/postpone}}">
+						
+		<div class="subitem-left quick_edit_item">
+			
+    		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
+            <!--span style="color:#888;">{{order}}</span-->
+		</div>
+		
+        
+        <div class="subitem-right" style="width:30px; float: right;  height:40px; padding:15px 20px 10px 20px;;">
+    		<img src="img/handle3.png"/>
+		</div>
+        
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
+
 <script id="filter_buttons_template" type="text/template">
     <button onclick="$('.context-filter').val('{{slot1}}'); $('.status-filter').val('open'); view_filter();">{{slot1}}</button>
     <button onclick="$('.context-filter').val('{{slot2}}'); $('.status-filter').val('open'); view_filter();">{{slot2}}</button>
@@ -645,7 +765,7 @@
 	 <span style="width:150px;"/>{{title}}</span><br>
 </script>
 
-<script id="category_template" type="text/template">
+<script id="category_select_template" type="text/template">
 	 <option class="cat" value="{{id}}">{{icon}} {{title}}</option>
 </script>
 	

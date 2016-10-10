@@ -1,7 +1,7 @@
 /* KNAPPAR   *******************************************************************/
 
 $(".add-button").click(function() {
-    itemList.add_from_form("#new-item-form");
+    itemList.add_from_form(current_page+" form");
      open_page(previous_page);
 });
 
@@ -23,7 +23,7 @@ $("#category_filter").change(function() {
  
  
 $(".delete-button").click(function() {
-	id = $("#edit-item-form .item-id").val();
+	id = $(current_page+" form .item-id").val();
     if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
 		itemList.remove_item(id);
 		open_page(previous_page);
@@ -86,7 +86,6 @@ $(".new-issue-button").click(function() {
 	
 	$("#new-item-form .context").hide();
 	open_page ("#new");
-	$("#new-item-form [name='title'] ").focus();
 });
 
 
@@ -103,7 +102,7 @@ $("#single_issue .new-task-button").click(function() {
 	
 	$("#new-item-form .category_select").hide();
 	open_page ("#new");
-	$("#new-item-form [name='title'] ").focus();
+	
 });
 
 $("#task_list .new-task-button").click(function() { 
@@ -118,22 +117,18 @@ $("#task_list .new-task-button").click(function() {
 	$('#new-item-form select[name="category"]').val("-"); 
 	
 	open_page ("#new");
-	$("#new-item-form [name='title'] ").focus();
+	
 });
 
 
 
 $(".new-category-button").click(function() { 
-	$("#new-item-form").children().show();
-	$('#new-item-form .autovalue').val(""); 
-	$('#new-item-form input[name="type"]').val("13"); 
-	$('#new-item-form input[name="parent_id"]').val(""); 
-    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+	$('#new-category-form .autovalue').val(""); 
+	$('#new-category-form input[name="type"]').val("13"); 
+	$('#new-category-form input[name="parent_id"]').val(""); 
+    	
+	open_page ("#new-category");
 	
-	
-	
-	open_page ("#new");
-	$("#new-item-form [name='title'] ").focus();
 });
 
 
@@ -148,8 +143,7 @@ $("#task_list input[name='icon']").click(function() {
 
 $(".save-button").click(function() {
     console.log(view);
-    itemList.edit_from_form("#edit-item-form");
-   
+    itemList.edit_from_form(current_page+" form");
      open_page(previous_page);
    
 });
@@ -177,7 +171,7 @@ $(".issue-list-button").click(function() {
 
 
 // GOTO EDIT  
-$(document).on('click', ".subitem-left", function() {
+$(document).on('click', ".task .subitem-left, .issue .subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
 
@@ -195,6 +189,20 @@ $(document).on('click', ".subitem-left", function() {
     open_page ("#edit");
 });
 
+
+// GOTO CATEGORY EDIT  
+$(document).on('click', ".category .subitem-left", function() {
+	id = $(this).parent().find(".item_id").text();
+	item = itemList.get_item(id);
+
+	$("#edit-category .menu-title").html("Edit: "+item.title);
+	
+    for (var key in item) {
+        $('#edit-category-form .autovalue[name="'+key+'"]').val(item[key]);
+    }
+      
+    open_page ("#edit-category");
+});
 
 // GOTO SINGLE ISSUE
 $(document).on('click', ".issue .subitem-center", function() {
