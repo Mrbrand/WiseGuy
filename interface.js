@@ -3,6 +3,7 @@ var itemList = new Carbon("wiseguy_items");
 
 var current_page = "#issues";
 var previous_page = "";
+var scroll_positions = [];
 var current_item={};
 var debug = new Timer();
 
@@ -33,9 +34,12 @@ view_issue_list();
 /* PageHandler class *******************************************************/
 
 function open_page (page_id, show_extra) {
+	scroll_positions[current_page] = $("body").scrollTop();
 	previous_page = current_page;
 	current_page = page_id;
-		
+	
+	console.log(scroll_positions);
+	
 	if(page_id == "#category_list") view_menu();
 	else if(page_id == "#issues") view_issue_list();
 	else if(page_id == "#single_issue") view_single_issue(current_item.id);
@@ -46,7 +50,9 @@ function open_page (page_id, show_extra) {
 	$(".page").hide();
 	$(page_id).show();
 	
-	window.scrollTo(0, 0);
+	
+	if(page_id == "#task_list" || page_id == "#issues" )  $("body").scrollTop(scroll_positions[page_id]);
+	else window.scrollTo(0, 0);
 }
 
 
@@ -56,13 +62,14 @@ function view_issue_list(){
     var query = $(".search").val().toLowerCase();
     var category = $("#category_filter").val();
     var show_postponed = $('#show_postponed').prop("checked");
-    
-   	if($('#debug').prop("checked")) debug.begin("Issues")
+    if($('#debug').prop("checked")) debug.begin("Issues");
     
     var open_items=itemList.get_all()
    		.query("type", "==", 7)
 		.query("finish_date", "==", "")
     	.query("title, notes", "contains", query);
+    	
+    	if (query=="" & category=="*") open_items = open_items.query("prio", "<" ,4);
       
     if(category!="*") open_items=open_items.query("category", "==", category);
     if(!show_postponed) open_items=open_items.query("postpone", "==", "");
@@ -76,7 +83,7 @@ function view_issue_list(){
 	
 	if($('#debug').prop("checked")) debug.comment("sortering klar");
 	
-	mustache_output("#filtered", open_items, "#issue_template");
+	mustache_output("#filtered", open_items, "#issue_template", "prio");
 	
 	if($('#debug').prop("checked")) debug.comment("output klar");
 	
@@ -105,7 +112,7 @@ function view_task_list(){
 		.query("title, notes", "contains", query);
 
      if(context) open_items=open_items.query("icon", "==", context);
-  
+ 	 if(query=="" & context=="") open_items = open_items.query("prio", "<" ,5);
     //sortera fltered items
     open_items.sort(
         firstBy("prio")
@@ -210,13 +217,25 @@ function set_categories(){
 
 
 
-function mustache_output(output_id, items, template_id){
+function mustache_output(output_id, items, template_id, group_by){
+    var new_group = "";
     $(output_id).empty();
+ 
     items.forEach(function(item) {
+		if(group_by){
+			if (item[group_by]!= new_group)  {
+				
+				prio_item_count = items.query(group_by,"==",item[group_by]).query("postpone","==","").length;
+				$(output_id).append("<div style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item[group_by]+".png'></div>");
+		   	}
+			new_group=item[group_by]; 
+		}
+		
 		item_meta = item_with_meta(item.id);
 		var template = $(template_id).html();
 		var html = Mustache.to_html(template, item_meta);
 		$(output_id).append(html);
+		
 	});
 }
 
@@ -232,6 +251,8 @@ function item_with_meta(id){
 	finished_tasks.sort(firstBy("finish_date"));
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
+	item.open_task_count = open_tasks.length;
+	if(item.open_task_count > 0)  item.open_task_count--;
 	item.finished_task_count = finished_tasks.length;
 	
 	var parent= itemList.get_item(item.parent_id);

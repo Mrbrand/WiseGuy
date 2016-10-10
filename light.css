@@ -14,6 +14,12 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#A0A040;}
     background: -webkit-linear-gradient(#FFF, #CCC);
     color: #333;
 }
+
+.item.issue{ 
+    background: -webkit-linear-gradient(#EEF, #BBC);
+    color: #333;
+}
+
 .notes{color:#88A;}
 .next_action{color: #A96;}
 

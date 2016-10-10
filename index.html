@@ -41,12 +41,12 @@
 
 		
 <!--ISSUES PAGE -------------->
-	<div id="issues" class="page">
+	<div id="issues" class="page" style="display:none;">
 			  
 			<div class="header">
 				
 				<div style="float:left;">
-				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt;">
+				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
 					<option value="*">-All-</option>
 					<option value="-">-No category-</option>
 					<option value="edit">Edit...</option>
@@ -123,7 +123,7 @@
 		
 		
 <!--TASK LIST -------------->
-	<div id="task_list" class="page">
+	<div id="task_list" class="page" style="display:none;">
 			  
 			<div class="header">
 				
@@ -136,7 +136,7 @@
 					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
 					<label><input type="radio" name="icon" value="📆" /><span>📆</span></label>
-					<label><input type="radio" name="icon" value="" /><span>none</span></label>
+					<label><input type="radio" name="icon" value="" /><span>all</span></label>
         		</div>
 			
 			
@@ -208,7 +208,7 @@
 
 			
 <!--SINGLE ISSUE PAGE -------------->
-	<div id="single_issue" class="page" style="display:block; min-height:450px;">
+	<div id="single_issue" class="page" style="display:none; min-height:450px;">
 	  
 	<div class="header">
 		<div class="menu-title">...</div>
@@ -241,7 +241,7 @@
 			
 			
 <!--CATEGORIES PAGE ----------------------------------------------------------------------->
-	<div id="category_list" class="page" style="display:block; min-height:450px;">
+	<div id="category_list" class="page" style="display:none; min-height:450px;" >
 	  
 	<!--Header -->
 	<div class="header">
@@ -265,7 +265,7 @@
 		
 		
 <!-- NEW item--------------------------------------------------------------------------->
-		<div id="new" class="page">
+		<div id="new" class="page" style="display:none;">
 			
 			<div class="header">
 				<div class="menu-title">-new item-</div>
@@ -338,7 +338,7 @@
 				
 		
 <!-- EDIT item ---------------------------------------------------------------------->
-		<div id="edit" class="page">
+		<div id="edit" class="page" style="display:none;">
 			
 			<div class="header">
 				<div class="menu-title">-item-title-</div>
@@ -455,7 +455,7 @@
 		
 
 <!MENU >
-		<div id="menu" class="page">
+		<div id="menu" class="page" style="display:none;">
 			
             <div class="header">
     			<div style="float:left;">Preferences</div>
@@ -503,9 +503,9 @@
             <!--span style="color:#888;">{{order}}</span-->
 		</div>
          
-         <div class="subitem-right" style="width:50px; float: right;  height:40px; padding:15px 10px 10px 10px; text-align:right;">
+         <!--div class="subitem-right" style="width:50px; float: right;  height:40px; padding:15px 10px 10px 10px; text-align:right;">
     		<span style="font-size:16pt; color: gray;">{{open_task_count}}<span style="font-size:12pt; color: lightgray;">/{{finished_task_count}}</span></span>
-		</div>
+		</div-->
 		
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
@@ -517,8 +517,8 @@
 					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
 					<span class="next_action">{{title}}</span>
 					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
-                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}<br/>
-				{{/subitems}}
+                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}
+				{{/subitems}} {{#open_task_count}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: rgba(150,150,100,0.2); color:#A96;">+{{open_task_count}}</span>{{/open_task_count}}
 			</div>
 		</div><!-- end subitem-center -->
 		 
