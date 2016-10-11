@@ -32,7 +32,7 @@ $(".delete-button").click(function() {
 
 
 $("#export-button").click(function() { 
-    var items = itemList.get_all();
+    var items = itemList.get_all().query("finished_date", "==", "");
     var items_string = JSON.stringify(items);
     $("#export").html(items_string);
     $(".page").hide();
@@ -76,10 +76,10 @@ $(".more-button").click(function() {
 $(".new-issue-button").click(function() {
 	$("#new-item-form").children().show();
 	
-	$("#new .menu-title").html("New Issue");
+	$("#new .menu-title").html("New Project");
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
-	$('#edit-item-form input:radio').prop('checked', false); 
+	$('#new-item-form input:radio[value=""]').prop('checked', true); 
 	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
@@ -95,7 +95,7 @@ $("#single_issue .new-task-button").click(function() {
 	$('#new-item-form .autovalue').val(""); 
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val(current_item.id); 
-    $('#edit-item-form input:radio').prop('checked', false); 
+    $('#new-item-form input:radio').prop('checked', false); 
     $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val(current_item.category); 
