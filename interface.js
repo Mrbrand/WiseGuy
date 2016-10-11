@@ -196,7 +196,7 @@ function reorder(items, from_pos, to_pos){
         item.order = index + offset;
         if(index == from_pos) item.order = to_pos;
     }
-    console.log(items);
+    //console.log(items);
     itemList.save(); 
 }
 
@@ -206,7 +206,7 @@ function reorder(items, from_pos, to_pos){
 function set_categories(){
    	var categories=itemList.get_all().query("type", "==", 13);
    	categories.sort(firstBy("order").thenBy("update_date", -1) );
-   	console.log("hej");
+   	//console.log("hej");
    	$(".cat").remove();
     categories.forEach(function(item) {
 		item_meta = item_with_meta(item.id);

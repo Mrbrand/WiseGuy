@@ -54,7 +54,7 @@
 				</div>
 			
 				<img class="task-list-button" src="img/type6.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
@@ -62,8 +62,8 @@
                 
                 <input class="search" onkeyup="view_issue_list();" type="search" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
                 	
-					<input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
-					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
+					<!--input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
+					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span-->
 				
                 <button class="new-issue-button" style="float:right;">New project</button>
             </div><!-- end controls-->
@@ -286,14 +286,21 @@
      			<select name="category" class="category_select autovalue">
 					<option value="-">-no category-</option>
 				</select>
-				
-     		<! CONTEXT>
-        		<span class="field-description context">Context</span>  
+
+
+           		<! PRIO>
+            	<span class="field-description">Prio</span>  
+				 <div style="margin: 10px 0;">
+		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
         		
-        		<!--div style="display:inline;">
-        			<input name="icon" class="autovalue" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
-           		</div-->
-           		
+        		<! CONTEXT>
+        		<span class="field-description context">Context</span>  
            		<div class="context" style="margin: 10px 0;">
 		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
@@ -310,24 +317,15 @@
         		</div>
         		
         		
-            <! PRIO>
-            	<span class="field-description">Prio</span>  
-				 <div style="margin: 10px 0;">
-		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
-  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
-  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
-  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
-        		</div>
-		    <! POSTPONE>
-                <input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
+            
+		    <!-- POSTPONE>
+                <input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" /-->
          
              <! NOTES>       
 				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
 				
 			 <! hidden >
-                <input name="order" value="0"  type="hidden" />
+                <input name="order" value="-1"  type="hidden" />
                 <input name="type"  class="autovalue" type="hidden" />
 				<input name="parent_id" class="autovalue" type="hidden" />
 				<input name="finish_date"  value="" type="hidden" />
@@ -363,7 +361,19 @@
 				<select name="category" class="category_select autovalue">
 					<option value="-">-no category-</option>
 				</select>
-		<! CONTEXT>
+		
+			<! PRIO>
+         		<span class="field-description">Prio</span>  
+         		<div style="margin: 10px 0;">
+		           		<label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
+        		
+        		<! CONTEXT>
         		<span class="field-description">Context</span>  
   
   				<div class="context" style="margin: 10px 0;">
@@ -376,28 +386,10 @@
 					<label><input type="radio" name="icon" value="📆" /><span>📆</span></label>
 					<label><input type="radio" name="icon" value="" /><span>none</span></label>
         		</div>
-        		<!--div style="display:inline;">
-        			<input class="autovalue" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
-           		</div-->
-        		
-        		<div class="context" style="margin: 10px 0; display:inline;">
-		            <!...>
-        		</div>                
-               
-        <! PRIO>
-         		<span class="field-description">Prio</span>  
-         		<div style="margin: 10px 0;">
-		           		<label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
-  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
-  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
-  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
-        		</div>
 
            
-         <! POSTPONE >   
-                <span class="field-description">Postpone</span>    
+         <!-- POSTPONE >   
+                <!--span class="field-description">Postpone</span>    
 				<input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
 				<!--
 				<input class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
@@ -411,9 +403,9 @@
 				<textarea class="autovalue" name="notes" rows="8" placeholder="Notes"></textarea>
 
 			<! MORE BUTTON >
-				<center>
+				<!--center>
 					<button class="more-button" type='button'>More options</button>
-				</center>
+				</center-->
 				
 				<div class="more" style="display:none;">
                     
@@ -478,7 +470,7 @@
 				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
 				
 			 <! hidden >
-                <input name="order" value="0"  type="hidden" />
+                <input name="order" value="-2"  type="hidden" />
                 <input name="type"  class="autovalue" type="hidden" />
 				<input name="parent_id" class="autovalue" type="hidden" />
 				<input name="finish_date"  value="" type="hidden" />

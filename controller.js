@@ -80,7 +80,7 @@ $(".new-issue-button").click(function() {
 	$('#new-item-form .autovalue').val(""); 
     $('#new-item-form input[name="type"]').val("7"); 
 	$('#new-item-form input:radio[value=""]').prop('checked', true); 
-	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+	$('#new-item-form input:radio[value="6"]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
 	
@@ -96,7 +96,7 @@ $("#single_issue .new-task-button").click(function() {
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val(current_item.id); 
     $('#new-item-form input:radio').prop('checked', false); 
-    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+    $('#new-item-form input:radio[value="6"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val(current_item.category); 
 	
@@ -112,7 +112,7 @@ $("#task_list .new-task-button").click(function() {
 	$('#new-item-form input[name="type"]').val("6"); 
 	$('#new-item-form input[name="parent_id"]').val("-"); 
     $('#edit-item-form input:radio').prop('checked', false); 
-    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+    $('#new-item-form input:radio[value="6"]').prop('checked', true); // prio (css trick med bilder)
     $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
 	$('#new-item-form select[name="category"]').val("-"); 
 	
