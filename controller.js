@@ -32,7 +32,7 @@ $(".delete-button").click(function() {
 
 
 $("#export-button").click(function() { 
-    var items = itemList.get_all().query("finished_date", "==", "");
+    var items = itemList.get_all().query("finish_date", "==", "");
     var items_string = JSON.stringify(items);
     $("#export").html(items_string);
     $(".page").hide();
