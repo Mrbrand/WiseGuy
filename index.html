@@ -34,11 +34,9 @@
         <script src="javascript/sortable.js"></script>
 		
 	</head>
-	
-	
+
 	<body>
 	
-
 		
 <!--ISSUES PAGE -------------->
 	<div id="issues" class="page" style="display:none;">
@@ -46,74 +44,22 @@
 			<div class="header">
 				
 				<div style="float:left;">
-				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
-					<option value="*">-All-</option>
-					<option value="-">-No category-</option>
-					<option value="edit">Edit...</option>
-				</select>
+					<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
+						<option value="*">-All-</option>
+						<option value="-">-No category-</option>
+						<option value="edit">Edit...</option>
+					</select>
 				</div>
 			
 				<img class="task-list-button" src="img/type6.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
-			</div> <!--end header-->
+  			</div> <!--end header-->
 			
 		<! Controls>
-			<div class="controls" style="height:40px; padding: 5px;">
-                
-                <input class="search" onkeyup="view_issue_list();" type="search" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
-                	
-					<!--input id="show_postponed" type="checkbox" style="width:25px; float:left; margin-left:5px;">
-					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span-->
-				
+			<div class="controls">
+                <input class="search" onkeyup="view_issue_list();" type="search" placeholder="🔍" value="" style="width:150px; float:left;"/>
                 <button class="new-issue-button" style="float:right;">New project</button>
             </div><!-- end controls-->
             
-        <! Controls categories>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
-                <div id="prefefined" style="float:left;"></div>
-                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
-            </div><!-- end controls categories-->
-       
-        <! Controls context>
-            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
-            	
-            </div><!-- end controls context-->
-            
-        <!Title-filter>
-            <div id="controls-title" class="controls-extra" style="display:none;">
-               
-               
-                <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('7'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('5'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type5.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('15'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type15.png" height="16"/></button>
-                <input class="type-filter" placeholder="Type" style="width:50px; margin-left:5px;"/>
-                
-                 <select style="float:right;margin-left:5px;width:40px;" class="prio-filter" onchange="view_filter();">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                    <option value="6">6</option>
-                </select>
-                
-                 <button class="status-button" onclick="togggleStatus();" style="float:right;margin-left:5px;">Status</button>
-                 <input class="path-filter" type="text" onkeyup="view_filter();" placeholder="Path string" value="" style="width:70px; margin-right:5px;"/>
-                 <input class="context-filter" type="text" onkeyup="view_filter();" placeholder="Context icon" value="" style="width:70px; margin-right:5px;"/>
-                
-            </div><!-- end controls-->
-            
-            
-            <!Status-filter>
-            <div id="controls-status" style="display:none;" >
-                <select class="status-filter" onchange="view_filter();">
-    				<option value="open">Status: Open</option>
-					<option value="finished">Status: Finished</option>
-				</select>
-            </div><!-- end controls-->
-			
 			<!-- ItemLista -->
 			<div id="items">
 				<div id="filtered"></div>
@@ -139,64 +85,16 @@
 					<label><input type="radio" name="icon" value="" checked="checked" /><span>All</span></label>
         		</div>
 			
-			
 				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
                 <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
-			<div class="controls" style="height:40px; padding: 5px;">
-                
-                <input class="search_task" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
-                
+			<div class="controls">
+                <input class="search" onkeyup="view_task_list();" type="search" placeholder="🔍" value="" style="width:150px; float:left;"/>   
                 <button class="new-task-button" style="float:right;">New task</button>
             </div><!-- end controls-->
             
-        <! Controls context>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
-                
-            </div><!-- end controls categories-->
-       
-        <! Controls context>
-            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
-            	
-            </div><!-- end controls context-->
-            
-        <!Title-filter>
-            <div id="controls-title" class="controls-extra" style="display:none;">
-               
-               
-                <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('7'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('5'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type5.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('15'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type15.png" height="16"/></button>
-                <input class="type-filter" placeholder="Type" style="width:50px; margin-left:5px;"/>
-                
-                 <select style="float:right;margin-left:5px;width:40px;" class="prio-filter" onchange="view_filter();">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                    <option value="6">6</option>
-                </select>
-                
-                 <button class="status-button" onclick="togggleStatus();" style="float:right;margin-left:5px;">Status</button>
-                 <input class="path-filter" type="text" onkeyup="view_filter();" placeholder="Path string" value="" style="width:70px; margin-right:5px;"/>
-                 <input class="context-filter" type="text" onkeyup="view_filter();" placeholder="Context icon" value="" style="width:70px; margin-right:5px;"/>
-                
-            </div><!-- end controls-->
-            
-            
-            <!Status-filter>
-            <div id="controls-status" style="display:none;" >
-                <select class="status-filter" onchange="view_filter();">
-    				<option value="open">Status: Open</option>
-					<option value="finished">Status: Finished</option>
-				</select>
-            </div><!-- end controls-->
-			
 			<!-- ItemLista -->
 			<div id="items">
 				<div id="tasks"></div>
@@ -291,10 +189,8 @@
            		<! PRIO>
             	<span class="field-description">Prio</span>  
 				 <div style="margin: 10px 0;">
-		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+		           		<label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
   						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
@@ -309,7 +205,7 @@
 					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
 					<label><input type="radio" name="icon" value="📆" /><span>📆</span></label>
-					<label><input type="radio" name="icon" value="" /><span>none</span></label>
+					<label><input type="radio" name="icon" value="-" /><span>none</span></label>
         		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
@@ -366,9 +262,7 @@
          		<span class="field-description">Prio</span>  
          		<div style="margin: 10px 0;">
 		           		<label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
   						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>

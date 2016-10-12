@@ -1,25 +1,16 @@
 /* bakgrund*/
-body {margin:0;  font-family:Verdana,Tahoma;background:#A0A040;}
+body {margin:0;  font-family:Verdana,Tahoma;background:#78A;}
 
 /* Där titel och knapp för Tree/Filter är*/
-.header{background:#A0A040;}
+.header{background:#78A;}
 
 /* Där back och new knapp sitter*/
-.controls{background: -webkit-linear-gradient(#333300, #1a1a00);}
+.controls{background: -webkit-linear-gradient(#567, #345);}
 
-/* Filter läge */
-#search .header{background:#808000;}
-
-.item{ 
+.project{ 
     background: -webkit-linear-gradient(#FFF, #CCC);
     color: #333;
 }
-
-.item.issue{ 
-    background: -webkit-linear-gradient(#EEF, #BBC);
-    color: #333;
-}
-
 .notes{color:#88A;}
 .next_action{color: #A96;}
 
@@ -36,9 +27,20 @@ body {margin:0;  font-family:Verdana,Tahoma;background:#A0A040;}
 .finished>.subitem-center>.next_action_div>.notes{color:#CCC;}
 .finished>.subitem-left>img{opacity: 0.4;}
 
+.item{ 
+    background: -webkit-linear-gradient(#FFF, #CCC);
+    color: #333;
+}
+
+.item.issue{ 
+    background: -webkit-linear-gradient(#EEF, #BBC);
+    color: #333;
+}
 
 
-
+#search .header{background:#364;}
+#search .controls{background: -webkit-linear-gradient(#252, #030);}
+#search {background:#7A9;}
 /* CSS - Cascading Style Sheet */
 /* Palette color codes */
 /* Palette URL: http://paletton.com/#uid=11s0u0klEbJdslfgrezqD7PyY3T */
