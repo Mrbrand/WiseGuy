@@ -62,7 +62,7 @@ input[type=radio]:checked + label>img {
 	.cancel-button {float:left;}
 	.add-button{float:right;}
 	 
-    .controls{background:#345;padding:5px; height:32px;}
+    .controls{background:#345;padding: 7px 5px; height: 32px;}
     .controls-extra{background:#345; padding:5px; overflow-x:hidden; min-width:100%-10px;;}
     .show-control{display: inline-block;}
     .submenu{background:#345;padding:5px; height:36px;}
